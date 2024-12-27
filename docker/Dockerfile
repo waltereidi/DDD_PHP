@@ -61,7 +61,6 @@ RUN groupadd --gid $GID $USERNAME
 RUN useradd --uid $UID --gid $GID -m $USERNAME
 RUN echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME
 RUN chmod 0440 /etc/sudoers.d/$USERNAME
-
 WORKDIR /var/www/
 ####
 COPY docker/start.sh /

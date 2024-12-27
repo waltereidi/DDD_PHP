@@ -14,4 +14,10 @@ sudo apt install symfony-cli
 
 sudo service nginx start
 
+sudo composer require --dev symfony/test-pack
+sudo composer require symfony/orm-pack
+sudo composer require --dev symfony/maker-bundle
+
 sudo tail -f /dev/null
+
+
