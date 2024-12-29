@@ -965,7 +965,7 @@ default_socket_timeout = 60
 
 ;zend_extension=opcache
 [xdebug]
-xdebug.mode = debug
+xdebug.mode = coverage
 xdebug.start_with_request = yes
 xdebug.client_host=xdebug://gateway
 

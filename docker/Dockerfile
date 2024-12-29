@@ -65,7 +65,7 @@ WORKDIR /var/www/
 ####
 COPY docker/start.sh /
 
-COPY docker/php.ini-debug /etc/php/8.2/fpm/php.ini
+COPY docker/php.ini-coverage /etc/php/8.2/fpm/php.ini
 
 RUN sudo chmod +x /start.sh
 RUN sudo chown -R $USERNAME:$USERNAME /var/www 
