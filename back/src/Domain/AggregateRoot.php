@@ -7,13 +7,20 @@ class AggregateRoot
 {
     /** @var DomainEvent[] */
     private array $recordedEvents = [];
-
+    /**
+     * Summary of id
+     * @var AggregateRootId
+     */
+    protected AggregateRootId $id;
     protected function recordApplyAndPublishThat(DomainEvent $event): void {
         $this->recordThat($event);
         $this->applyThat($event);
         $this->publishThat($event);
     }
-
+    public function id() : AggregateRootId
+    {
+        return $this->id;
+    }
     protected function recordThat(DomainEvent $event): void
     {
         $this->recordedEvents[] = $event;

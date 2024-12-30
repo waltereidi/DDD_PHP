@@ -3,6 +3,9 @@
 
 service postgresql start
 psql -U postgres -c "ALTER USER postgres PASSWORD 'postgres';"
+
+psql -U postgres -c "CREATE DATABASE biblioteca2"
+
 nginx -g "daemon off"
 
 sudo service php8.2-fpm start

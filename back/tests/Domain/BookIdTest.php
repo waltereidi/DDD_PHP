@@ -9,7 +9,9 @@ final class BookIdTest extends TestCase
     public function testBookId(): void
     {
         $e = new BookId("1");
-        $this->assertNotNull($e , 'BookId could not compile');
+        $id = $e->create();
+        $this->assertNotNull($id , 'BookId could not compile');
+        $this->assertInstanceOf(BookId::class , $id ,'Inheritance test failed');
     }
     
 }

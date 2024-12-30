@@ -9,8 +9,8 @@ abstract class Entity{
     #[ORM\GeneratedValue]
     #[ORM\Column]
     public ?int $id = null;
-
-    public object $_events = [];
+  /** @var object[] */
+    public array $_events = [];
     
     public function __construct() {
     }
