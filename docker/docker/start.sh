@@ -4,8 +4,6 @@
 service postgresql start
 psql -U postgres -c "ALTER USER postgres PASSWORD 'postgres';"
 
-psql -U postgres -c "CREATE DATABASE biblioteca2"
-
 nginx -g "daemon off"
 
 sudo service php8.2-fpm start
@@ -17,6 +15,8 @@ sudo apt install symfony-cli
 sudo sed -i '$d' /etc/hosts
 echo "127.0.0.1 host.docker.internal" >> /etc/hosts
 sudo service nginx start
+
+
 
 sudo tail -f /dev/null
 
