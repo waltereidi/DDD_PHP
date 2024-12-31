@@ -11,24 +11,11 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class CategoryRepository extends ServiceEntityRepository
 {
-    private $_repository =$this->getDoctrine()->getRepository(Category::class);
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Category::class);
     }
-    public function getById(int $id) : Category
-    {
-        // createQueryBuilder() automatically selects FROM AppBundle:Product
-        // and aliases it to "p"
-        $query = $this->_repository->createQueryBuilder('c')
-            ->where('c.id =:val')
-            ->setParameter('val', $id )
-            ->getQuery();
 
-        $result = $query->getResult();     
-
-        return $result;
-    }
 //    /**
 //     * @return Category[] Returns an array of Category objects
 //     */

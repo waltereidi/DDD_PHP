@@ -8,17 +8,12 @@ ARG GITREPOSFRONTPARAM
 
 
 # Basic setup
-RUN apt update && apt upgrade -y
-RUN apt install -y sudo nano zip
-RUN apt install -y sudo nano zip git
-RUN apt install -y sudo unzip 
-RUN apt install -y sudo libzip-dev
-RUN apt install -y sudo wget
-RUN apt install -y sudo php-xdebug
+RUN apt update && apt upgrade -y && \
+apt install -y sudo nano zip git unzip libzip-dev wget php-xdebug \
+php8.2-fpm php8.2-mbstring php8.2-xml php8.2-pgsql php8.2-curl php8.2-zip
 
 RUN mkdir /var/www
 # PHP
-RUN apt install -y php8.2-fpm php8.2-mbstring php8.2-xml php8.2-pgsql php8.2-curl php8.2-zip
 RUN apt install -y php-dev autoconf automake
 
 
