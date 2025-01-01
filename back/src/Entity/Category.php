@@ -14,12 +14,12 @@ class Category extends Entity
     }
 
     #[ORM\Column(length: 255)]
-    public ?string $Name = null;
+    public ?string $name = null;
 
     #[ORM\Column(length: 4096, nullable: true)]
-    public ?string $Description = null;
+    public ?string $description = null;
 
     #[ORM\Column]
-    public ?bool $Active = null;
+    public ?bool $active = null;
 
 }

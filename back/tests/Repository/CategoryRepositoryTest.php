@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Tests\Repository;
+use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManager;
 use App\Entity\Category;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 use function PHPUnit\Framework\assertNotNull;
@@ -10,23 +12,22 @@ use function PHPUnit\Framework\assertNotNull;
 class CategoryRepositoryTest extends KernelTestCase
 {
    
-    private ?EntityManager $entityManager;
-
+    private CategoryRepository $categoryRepository;
+    private ?ManagerRegistry $managerRegistry;
+    
     protected function setUp(): void
     {
         $kernel = self::bootKernel();
 
-        $this->entityManager = $kernel->getContainer()
-            ->get('doctrine')
-            ->getManager(); 
+        $this->managerRegistry = $kernel->getContainer()
+        ->get('doctrine');
+        $this->categoryRepository = new CategoryRepository( $this->managerRegistry );
     }
 
-    public function testGetById() : void 
+    public function testGetByIdReturnsNull() : void 
     {
-        $e = $this->entityManager
-            ->getRepository(Category::class)
-            ->findOneBy(['id' => 1]);
-
-        assertNotNull("id");
+        $category = $this->categoryRepository->getById(1);
+        
+        assertNotNull($category);
     }
 }

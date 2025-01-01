@@ -3,25 +3,17 @@
 namespace App\Repository;
 
 use App\Entity\Category;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Tests\Repository\ModelProjections;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Category>
+ * @extends ModelProjections<Entity>
  */
-class CategoryRepository extends ServiceEntityRepository
+class CategoryRepository extends ModelProjections
 {
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Category::class);
-    }
-    public function getById(int $id)
-    {
-        return $this->createQueryBuilder('c')
-            ->where('c.Id = :val')
-            ->setParameter('val' , $id )
-            ->getQuery()
-            ->getResult();
     }
 //    /**
 //     * @return Category[] Returns an array of Category objects
