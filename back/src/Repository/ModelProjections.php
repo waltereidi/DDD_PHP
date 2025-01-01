@@ -21,8 +21,15 @@ abstract class ModelProjections extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-    public function updateById(object $entity)  
+    public function Merge(object $entity)  
     {     
-        $this->
+        $entityManager = $this->getEntityManager();
+
+        // tell Doctrine you want to (eventually) save the Product (no queries yet)
+        $entityManager->persist($entity);
+
+        // actually executes the queries (i.e. the INSERT query)
+        $entityManager->flush();
     }
+    
 }

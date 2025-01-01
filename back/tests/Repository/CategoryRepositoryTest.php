@@ -2,8 +2,6 @@
 
 namespace App\Tests\Repository;
 use App\Repository\CategoryRepository;
-use Doctrine\ORM\EntityManager;
-use App\Entity\Category;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -19,11 +17,18 @@ class CategoryRepositoryTest extends KernelTestCase
     {
         $kernel = self::bootKernel();
 
-        $this->managerRegistry = $kernel->getContainer()
-        ->get('doctrine');
+        $this->managerRegistry = $kernel
+            ->getContainer()
+            ->get('doctrine');
+
         $this->categoryRepository = new CategoryRepository( $this->managerRegistry );
     }
-
+    public function testInsertNewCategory() : void 
+    {
+        $category = $this->categoryRepository->getById(1);
+        
+        assertNotNull($category);
+    }
     public function testGetByIdReturnsNull() : void 
     {
         $category = $this->categoryRepository->getById(1);
