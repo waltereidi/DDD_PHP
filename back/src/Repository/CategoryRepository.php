@@ -6,9 +6,6 @@ use App\Entity\Category;
 use App\Tests\Repository\ModelProjections;
 use Doctrine\Persistence\ManagerRegistry;
 
-/**
- * @extends ModelProjections<Entity>
- */
 class CategoryRepository extends ModelProjections
 {
     public function __construct(ManagerRegistry $registry)

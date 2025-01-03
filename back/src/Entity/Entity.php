@@ -1,9 +1,10 @@
 <?php 
 namespace App\Entity;
+use App\Domain\DomainEventSubscriber;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-abstract class Entity
+abstract class Entity implements DomainEventSubscriber
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -19,9 +20,14 @@ abstract class Entity
     /** @var object[] */
     public array $_events = [];
     
-    public function __construct() {
+    public function __construct() 
+    {
       
     }
     
+    public function isSubscribedTo($aDomainEvent) : bool 
+    {
+        return false; 
+    }
 
 }

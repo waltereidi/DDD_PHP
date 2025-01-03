@@ -7,7 +7,7 @@ interface DomainEventSubscriber
     /**
      * @param DomainEvent $aDomainEvent
      */
-    public function handle($aDomainEvent);
+    public function handle(DomainEvent $aDomainEvent) : DomainEvent;
 
     /**
      * @param DomainEvent $aDomainEvent

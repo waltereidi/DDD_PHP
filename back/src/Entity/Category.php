@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Domain\DomainEvent;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -13,13 +14,18 @@ class Category extends Entity
         parent::__construct();
     }
 
-    #[ORM\Column(length: 255)]
-    public ?string $name = null;
+    #[ORM\Column(length: 255, nullable: false)]
+    public string $name = null;
 
     #[ORM\Column(length: 4096, nullable: true)]
     public ?string $description = null;
 
-    #[ORM\Column]
-    public ?bool $active = null;
+    #[ORM\Column(nullable: false)]
+    public bool $active = null;
 
+    public function handle(DomainEvent $aDomainEvent) :DomainEvent
+    {
+        return $aDomainEvent;         
+    }
+    
 }

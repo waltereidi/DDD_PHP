@@ -2,6 +2,7 @@
 
 namespace App\Domain;
 
-class DomainEvent
+interface DomainEvent
 {
+    public function occurredOn(): \DateTimeImmutable;
 }
