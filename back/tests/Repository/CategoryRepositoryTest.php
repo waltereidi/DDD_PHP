@@ -35,6 +35,7 @@ class CategoryRepositoryTest extends KernelTestCase
         
         $this->assertTrue($result);
     }
+    
     public function testGetByIdReturnsNull() : void 
     {
         $category = $this->categoryRepository->getById(1);
