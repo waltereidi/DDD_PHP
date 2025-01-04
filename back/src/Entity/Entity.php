@@ -6,7 +6,7 @@ use App\Domain\DomainEventSubscriber;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-abstract class Entity implements DomainEventSubscriber
+abstract class Entity extends DomainEventSubscriber
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -18,27 +18,25 @@ abstract class Entity implements DomainEventSubscriber
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updated_at = null;
-    
-    /** @var DomainEvent[] */
-    public array $_events = [];
-    
+
     public function __construct() 
     {
     }
-    
-    public function isSubscribedTo($aDomainEvent) : bool 
-    {
-        return false; 
-    }
-    /**
-     * Is a Event Handler SSOT
-     * Select a event to be executed in this entity
-     * @param \App\Domain\DomainEvent $aDomainEvent
-     * @return void
-     */
+
+    #[\Override]
     public function handle(DomainEvent $aDomainEvent) :void
     {
+        $this->setEntityTime();
+        $this->when($aDomainEvent);
     }
+    protected function setEntityTime() : void
+    {
+        if($this->created_at == null )
+            $this->created_at = new \DateTime();
+        else
+            $this->updated_at = new \DateTime();
+    }
+
 
 
 }

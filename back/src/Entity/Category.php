@@ -14,20 +14,20 @@ class Category extends Entity
     }
 
     #[ORM\Column(length: 255, nullable: false)]
-    public ?string $name = null;
+    public string $name = "";
 
     #[ORM\Column(length: 4096, nullable: true)]
     public ?string $description = null;
 
     #[ORM\Column(nullable: false)]
-    public ?bool $active = null;
-
+    public bool $active = false;
+    
     #[\Override]
-    public function handle(DomainEvent $e) :void
+    protected function when(DomainEvent $e) :void
     {
-        match($e::class)
+        switch($e::class)
         {
-            CreateNewCategory::class => $this->handleCreateNewCategory($e), 
+            case CreateNewCategory::class : $this->handleCreateNewCategory($e);break;
         };
     }
     private function handleCreateNewCategory(CreateNewCategory $e) :void
