@@ -5,7 +5,7 @@ use App\Domain\Books\Events\CreateNewCategory;
 use App\Entity\Category;
 use PHPUnit\Framework\TestCase;
 
-final class BookTest extends TestCase
+final class CategoryTest extends TestCase
 {
 
     public function testBookId(): void

@@ -2,7 +2,7 @@
 
 namespace App\Domain;
 
-abstract class DomainEventSubscriber
+interface DomainEventSubscriber
 {
      /**
      * Is a Event Handler SSOT
@@ -10,24 +10,15 @@ abstract class DomainEventSubscriber
      * @param \App\Domain\DomainEvent $aDomainEvent
      * @return void
      */
-    public abstract function handle(DomainEvent $aDomainEvent) :void;
+    public function handle(DomainEvent $aDomainEvent) :void;
 
     /**
-     * TODO: Implement this method 
-     * Is this event already subscribed 
+     * Subscribe to ensures that an event can be executed ,
+     * the rules for this method should increase along with the business rules
      * @param DomainEvent $aDomainEvent
      * @return bool
      */
-    public function isSubscribedTo($aDomainEvent) : bool 
-    {
-        //TODO: Implement this method
-        return false; 
-    }
-    /**
-     * Override this method to select between events actions
-     * @param \App\Domain\DomainEvent $aDomainEvent
-     * @return void
-     */
-    protected abstract function when(DomainEvent $aDomainEvent):void;
+    public function isSubscribedTo(DomainEvent $aDomainEvent) : bool;
+
 
 }

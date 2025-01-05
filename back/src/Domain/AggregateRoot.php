@@ -3,7 +3,7 @@
 namespace App\Domain;
 
 //snippet aggregate-root
-class AggregateRoot
+abstract class AggregateRoot
 {
     /** @var DomainEvent[] */
     private array $recordedEvents = [];
@@ -12,6 +12,11 @@ class AggregateRoot
      * @var AggregateRootId
      */
     protected AggregateRootId $id;
+
+    public function __construct(AggregateRootId $id){
+        $this->id = $id;
+    }
+    
     protected function recordApplyAndPublishThat(DomainEvent $event): void {
         $this->recordThat($event);
         $this->applyThat($event);
