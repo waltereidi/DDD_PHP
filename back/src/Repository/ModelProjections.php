@@ -21,7 +21,7 @@ abstract class ModelProjections extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-    public function Merge(object $entity)  
+    public function Merge(object $entity)  : object
     {     
         $entityManager = $this->getEntityManager();
 
@@ -30,6 +30,8 @@ abstract class ModelProjections extends ServiceEntityRepository
 
         // actually executes the queries (i.e. the INSERT query)
         $entityManager->flush();
+
+        return $entity;
     }
     
 }

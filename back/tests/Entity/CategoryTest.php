@@ -14,7 +14,7 @@ final class CategoryTest extends TestCase
         $createCategory = new CreateNewCategory("TestCase" , null , null );
         $entity = new Category;
         $entity->handle($createCategory);
-        $this->assertSame($entity->name, $createCategory->getName());
+        $this->assertSame($entity->getName(), $createCategory->getName());
         
     }
     

@@ -4,8 +4,10 @@ use App\Domain\AggregateRoot;
 use App\Domain\Books\Events as Events;
 use App\Domain\Books\Events\CreateNewCategory;
 
-class Book extends AggregateRoot {
+class BookDomain extends AggregateRoot {
     
+
+
     public function __construct(BookId $bookId) {
         parent::__construct($bookId);
     }

@@ -1,16 +1,16 @@
 <?php
 
 namespace App\Tests\Repository;
+use App\Domain\Books\Events\CreateNewCategory;
+use App\Entity\Category;
 use App\Repository\CategoryRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use PHPUnit\Util\Json;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 use function PHPUnit\Framework\assertNotNull;
 
 class CategoryRepositoryTest extends KernelTestCase
 {
-   
     private CategoryRepository $categoryRepository;
     private ?ManagerRegistry $managerRegistry;
         
@@ -24,18 +24,16 @@ class CategoryRepositoryTest extends KernelTestCase
 
         $this->categoryRepository = new CategoryRepository( $this->managerRegistry );
     }
-    //delete it later
-     public function testSemantics() : void 
-    {
-        $list = [];
-        $test = new Json('');
-        array_push($list , $test);
+    public function testAddNew(){
+     
+        $createCategory = new CreateNewCategory("TestCase" , null , null );
+        $entity = new Category();
+        $entity->handle($createCategory);
         
-        $result = array_filter(array: $list, callback: fn($x): bool=> $x::class == Json::class);
-        
-        $this->assertTrue($result);
+        $category = $this->categoryRepository->Merge($entity);
+        assertNotNull($entity->getId());
     }
-    
+
     public function testGetByIdReturnsNull() : void 
     {
         $category = $this->categoryRepository->getById(1);

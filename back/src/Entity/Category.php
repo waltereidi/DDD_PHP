@@ -15,30 +15,35 @@ class Category extends Entity implements DomainEventSubscriber
     }
 
     #[ORM\Column(length: 255, nullable: false)]
-    public string $name = "";
+    private string $name = "";
 
     #[ORM\Column(length: 4096, nullable: true)]
-    public ?string $description = null;
+    private ?string $description = null;
 
     #[ORM\Column(nullable: false)]
-    public bool $active = false;
+    private bool $active = false;
 
+    public function getName() : string
+    {
+        return $this->name;
+    }
+   
+    public function getDescription() : ?string
+    {
+        return $this->description;
+    }
 
+    public function getActive() : bool
+    {
+        return $this->active;
+    }
 
     public function handle(DomainEvent $aDomainEvent) :void
     {
         $this->setEntityTime();
         $this->when($aDomainEvent);
     }
-    protected function setEntityTime() : void
-    {
-        if($this->created_at == null )
-            $this->created_at = new \DateTime();
-        else
-            $this->updated_at = new \DateTime();
-    }
 
-    
     protected function when(DomainEvent $e) :void
     {
         switch($e::class)

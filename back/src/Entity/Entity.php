@@ -1,8 +1,6 @@
 <?php 
 
 namespace App\Entity;
-use App\Domain\DomainEvent;
-use App\Domain\DomainEventSubscriber;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -23,7 +21,15 @@ abstract class Entity
     {
     }
 
+    protected function setEntityTime() : void
+    {
+        if($this->created_at == null )
+            $this->created_at = new \DateTime();
+        else
+            $this->updated_at = new \DateTime();
+    }
 
+    
 
 
 }
