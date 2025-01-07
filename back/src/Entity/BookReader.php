@@ -21,7 +21,6 @@ class BookReader extends Entity implements DomainEventSubscriber
     #[ORM\Column(length: 4096, nullable: true)]
     private ?string $commentary = null;
 
-
     public function getId(): ?int
     {
         return $this->id;
@@ -32,37 +31,15 @@ class BookReader extends Entity implements DomainEventSubscriber
         return $this->book_id;
     }
 
-    public function setBookId(int $book_id): BookReader
-    {
-        $this->book_id = $book_id;
-
-        return $this;
-    }
-
     public function getCommentary(): ?string
     {
         return $this->commentary;
     }
-
-    public function setCommentary(?string $commentary): BookReader
-    {
-        $this->commentary = $commentary;
-
-        return $this;
-    }
-
     public function getUserId(): ?int
     {
         return $this->user_id;
     }
 
-    public function setUserId(int $user_id): BookReader
-    {
-        $this->user_id = $user_id;
-
-        return $this;
-    }
-    
     public function handle(DomainEvent $aDomainEvent) :void
     {
     }

@@ -15,16 +15,10 @@ class User extends Entity
     #[ORM\Column(length: 255)]
     private string $email;
 
-    public function getEmail(): ?string
+
+    public function getEmail(string $email): string
     {
         return $this->email;
-    }
-
-    public function setEmail(string $email): User
-    {
-        $this->email = $email;
-
-        return $this;
     }
     
     public function handle(DomainEvent $aDomainEvent) :void

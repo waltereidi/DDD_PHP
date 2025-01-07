@@ -4,7 +4,7 @@ namespace App\Domain\Books\Events;
 
 use App\Domain\DomainEvent;
 
-class CreateNewCategory implements DomainEvent
+class CreateCategory implements DomainEvent
 {
     private string $name ; 
     private string|null $description ; 

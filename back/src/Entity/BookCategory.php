@@ -29,25 +29,11 @@ class BookCategory extends Entity implements DomainEventSubscriber
         return $this->book_id;
     }
 
-    public function setBookId(int $book_id): static
-    {
-        $this->book_id = $book_id;
-
-        return $this;
-    }
-
     public function getCategorId(): ?int
     {
         return $this->categor_id;
     }
 
-    public function setCategorId(int $categor_id): static
-    {
-        $this->categor_id = $categor_id;
-
-        return $this;
-    }
-    
     public function handle(DomainEvent $aDomainEvent) :void
     {
     }
