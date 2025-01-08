@@ -35,11 +35,6 @@ class UserBookReadingNow extends Entity implements DomainEventSubscriber
     {
         return $this->book_id;
     }
-    public function getCommentary(): ?string
-    {
-        return $this->commentary;
-    }
-
     public function isActive(): ?bool
     {
         return $this->active;
