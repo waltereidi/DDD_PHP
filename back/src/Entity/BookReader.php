@@ -6,17 +6,18 @@ use App\Domain\DomainEvent;
 use App\Domain\DomainEventSubscriber;
 use App\Repository\BookReaderRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Uuid;
 
 #[ORM\Entity(repositoryClass: BookReaderRepository::class)]
 class BookReader extends Entity implements DomainEventSubscriber
 {
-    #[ORM\Column]
     #[ORM\OneToOne(targetEntity: Book::class, mappedBy: 'BookReader')]
-    private int $book_id;
+    #[ORM\Column(type: "UuidType")]
+    private Uuid $book_id;
     
-    #[ORM\Column]
     #[ORM\OneToOne(targetEntity: User::class, mappedBy: 'BookReader')]
-    private int $user_id;
+    #[ORM\Column(type: "UuidType")]
+    private Uuid $user_id;
 
     #[ORM\Column(length: 4096, nullable: true)]
     private ?string $commentary = null;
@@ -26,7 +27,7 @@ class BookReader extends Entity implements DomainEventSubscriber
         return $this->id;
     }
 
-    public function getBookId(): ?int
+    public function getBookId(): Uuid
     {
         return $this->book_id;
     }
@@ -35,7 +36,7 @@ class BookReader extends Entity implements DomainEventSubscriber
     {
         return $this->commentary;
     }
-    public function getUserId(): ?int
+    public function getUserId(): Uuid
     {
         return $this->user_id;
     }

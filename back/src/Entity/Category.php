@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Domain\Books\Events\CreateNewCategory;
+use App\Domain\Books\Events\CreateCategory;
 use App\Domain\DomainEvent;
 use App\Domain\DomainEventSubscriber;
 use Doctrine\ORM\Mapping as ORM;
@@ -42,16 +42,17 @@ class Category extends Entity implements DomainEventSubscriber
     {
         $this->setEntityTime();
         $this->when($aDomainEvent);
+        $this->setNewGuid();
     }
 
     protected function when(DomainEvent $e) :void
     {
         switch($e::class)
         {
-            case CreateNewCategory::class : $this->handleCreateNewCategory($e);break;
+            case CreateCategory::class : $this->handleCreateNewCategory($e);break;
         };
     }
-    private function handleCreateNewCategory(CreateNewCategory $e) :void
+    private function handleCreateNewCategory(CreateCategory $e) :void
     {
         
         $this->name = $e->getName();
@@ -66,7 +67,7 @@ class Category extends Entity implements DomainEventSubscriber
      */
     public function isSubscribedTo(DomainEvent $aDomainEvent) : bool
     {
-        $allowedEvents = array(CreateNewCategory::class);
+        $allowedEvents = array(CreateCategory::class);
 
         return true;
     }

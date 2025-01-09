@@ -3,13 +3,14 @@
 namespace App\Entity;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Uuid;
 
 abstract class Entity 
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
-    public ?int $id = null;
+    #[ORM\Column(type: "UuidType")]
+    public ?Uuid $id = null;
   
     #[ORM\Column(type: Types::DATETIME_MUTABLE, options: ["default" => "CURRENT_TIMESTAMP"])]
     public ?\DateTimeInterface $created_at = null;
@@ -20,7 +21,10 @@ abstract class Entity
     public function __construct() 
     {
     }
-
+    protected function setNewGuid():void
+    {
+        $this->id = new static(Uuid::uuid4());
+    }
     protected function setEntityTime() : void
     {
         if($this->created_at == null )
@@ -29,7 +33,6 @@ abstract class Entity
             $this->updated_at = new \DateTime();
     }
 
-    
 
 
 }
