@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Tests\Repository;
-use App\Domain\Books\Events\CreateNewCategory;
+use App\Domain\Books\Events\CreateCategory;
 use App\Entity\Category;
 use App\Repository\CategoryRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -26,10 +26,9 @@ class CategoryRepositoryTest extends KernelTestCase
     }
     public function testAddNew(){
      
-        $createCategory = new CreateNewCategory("TestCase" , null , null );
+        $createCategory = new CreateCategory("TestCase" , null , null );
         $entity = new Category();
         $entity->handle($createCategory);
-        
         $category = $this->categoryRepository->Merge($entity);
         assertNotNull($entity->getId());
     }

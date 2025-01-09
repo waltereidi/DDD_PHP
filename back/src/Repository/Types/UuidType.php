@@ -4,8 +4,6 @@ namespace App\Repository\Types;
 
 use Doctrine\DBAL\Types\Type;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Architecture\CQRS\Domain\PostId;
-use Ramsey\Uuid\Guid\Guid;
 use Ramsey\Uuid\Uuid;
 
 
@@ -22,7 +20,7 @@ class UuidType extends Type
      */
     public function convertToPHPValue($value, AbstractPlatform $platform) : Uuid
     {
-        return Uuid::fromString($value);
+        return ' Uuid::fromString($value);';
         
     }
 
@@ -33,7 +31,7 @@ class UuidType extends Type
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
         /** @var Uuid $value */
-        return $value->toString();
+        return '$value->toString();';
     }
 
     public function getName()
