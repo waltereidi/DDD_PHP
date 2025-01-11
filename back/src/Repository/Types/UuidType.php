@@ -2,16 +2,16 @@
 
 namespace App\Repository\Types;
 
-use Doctrine\DBAL\Types\Type;
+use Doctrine\DBAL\Types\StringType;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Ramsey\Uuid\Uuid;
 
 
-class UuidType extends Type
+class UuidType extends StringType
 {
-    public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform)
+    public function requiresSQLCommentHint(AbstractPlatform $platform): bool
     {
-        return $platform->getGuidTypeDeclarationSQL($fieldDeclaration);
+        return true;
     }
 
     /**
@@ -20,8 +20,7 @@ class UuidType extends Type
      */
     public function convertToPHPValue($value, AbstractPlatform $platform) : Uuid
     {
-        return ' Uuid::fromString($value);';
-        
+        return Uuid::fromString($value);
     }
 
     /**
@@ -31,7 +30,7 @@ class UuidType extends Type
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
         /** @var Uuid $value */
-        return '$value->toString();';
+        return $value->toString();
     }
 
     public function getName()

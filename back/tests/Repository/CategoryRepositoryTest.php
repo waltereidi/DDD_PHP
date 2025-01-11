@@ -29,6 +29,7 @@ class CategoryRepositoryTest extends KernelTestCase
         $createCategory = new CreateCategory("TestCase" , null , null );
         $entity = new Category();
         $entity->handle($createCategory);
+
         $category = $this->categoryRepository->Merge($entity);
         assertNotNull($entity->getId());
     }

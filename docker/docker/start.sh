@@ -17,6 +17,12 @@ echo "127.0.0.1 host.docker.internal" >> /etc/hosts
 sudo service nginx start
 
 
+sudo symfony console doctrine:database:create 
+sudo symfony console doctrine:migrations:migrate --dry-run
+
+sudo symfony console doctrine:database:create --env=test
+sudo symfony console doctrine:migrations:migrate --env=test --dry-run
+
 
 sudo tail -f /dev/null
 
