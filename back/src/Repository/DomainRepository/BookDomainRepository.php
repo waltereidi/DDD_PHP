@@ -2,25 +2,31 @@
 
 namespace App\Repository\DomainRepository;
 
-use App\Repository as Repository;
-use Symfony\Bridge\Doctrine\ManagerRegistry;
+use App\Entity\Book;
+use App\Entity\BookCategory;
+use App\Entity\BookReader;
+use App\Entity\Category;
+use App\Entity\User;
+use App\Entity\UserBookReadingNow;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityRepository;
 
 class BookDomainRepository {
 
-    public readonly Repository\BookRepository $bookRepository;
-    public readonly Repository\BookCategoryRepository $bookCategoryRepository;
-    public readonly Repository\CategoryRepository $categoryRepository;
-    public readonly Repository\UserBookReadingNowRepository $userBookReadingNowRepository;
-    public readonly Repository\UserRepository $userRepository;
-    public readonly Repository\BookReaderRepository $bookReaderRepository;
+    public readonly EntityRepository $bookRepository;
+    public readonly EntityRepository $bookCategoryRepository;
+    public readonly EntityRepository $categoryRepository;
+    public readonly EntityRepository $userBookReadingNowRepository;
+    public readonly EntityRepository $userRepository;
+    public readonly EntityRepository $bookReaderRepository;
     
-    public function __construct(ManagerRegistry $managerRegistry){
-        $this->bookRepository =  new Repository\BookRepository($managerRegistry);
-        $this->bookCategoryRepository =  new Repository\BookCategoryRepository($managerRegistry);
-        $this->categoryRepository =  new Repository\CategoryRepository($managerRegistry);
-        $this->userBookReadingNowRepository =  new Repository\UserBookReadingNowRepository($managerRegistry);
-        $this->userRepository =  new Repository\UserRepository($managerRegistry);
-        $this->bookReaderRepository =  new Repository\BookReaderRepository($managerRegistry);
+    public function __construct(EntityManagerInterface $entityManagerInterface){
+        $this->bookRepository = $entityManagerInterface->getRepository(Book::class);
+        $this->bookCategoryRepository = $entityManagerInterface->getRepository(BookCategory::class);
+        $this->categoryRepository = $entityManagerInterface->getRepository(Category::class);
+        $this->userBookReadingNowRepository = $entityManagerInterface->getRepository(UserBookReadingNow::class);
+        $this->userRepository = $entityManagerInterface->getRepository(User::class);
+        $this->bookReaderRepository = $entityManagerInterface->getRepository(BookReader::class);
     }
 
 

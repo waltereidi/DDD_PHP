@@ -13,7 +13,7 @@ final class BookTest extends TestCase
         $id = $e->create();
 
         $bookAggregateRoot = new BookDomain($id);
-        $bookAggregateRoot->testeEvent();
+        
  
     }
     

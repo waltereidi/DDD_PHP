@@ -3,18 +3,20 @@ namespace App\Domain\Books;
 use App\Domain\AggregateRoot;
 use App\Domain\Books\Events\UserAddedBook;
 use App\Repository\DomainRepository\BookDomainRepository;
-use Doctrine\ORM\EntityManagerInterface;
 
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class BookDomain extends AggregateRoot {
     private readonly BookDomainRepository $bookDomainRepository;
-    public function __construct(BookId $bookId , EntityManagerInterface $entityManager) {
+    
+    
+    public function __construct(BookId $bookId ) 
+    {
         parent::__construct($bookId);
-        $entityManager->getRepository(BookDomainRepository::class)
     }
     private function applyUserAddedBook(UserAddedBook $e) :void
     {
-        
+
 
     }
     
