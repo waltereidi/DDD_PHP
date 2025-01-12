@@ -11,19 +11,8 @@ use Ramsey\Uuid\Uuid;
 #[ORM\Entity(repositoryClass: BookCategoryRepository::class)]
 class BookCategory extends Entity implements DomainEventSubscriber
 {
-    
-    #[ORM\OneToOne(targetEntity: User::class, mappedBy: 'BookCategory')]
-    #[ORM\Column(type: "UuidType")]
     private Uuid $book_id;
-
-    #[ORM\OneToOne(targetEntity: User::class, mappedBy: 'BookCategory')]
-    #[ORM\Column(type: "UuidType")]
-    private Uuid  $categor_id;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    private Uuid  $category_id;
 
     public function getBookId(): ?Uuid
     {
@@ -32,7 +21,7 @@ class BookCategory extends Entity implements DomainEventSubscriber
 
     public function getCategorId(): ?Uuid
     {
-        return $this->categor_id;
+        return $this->category_id;
     }
 
     public function handle(DomainEvent $aDomainEvent) :void

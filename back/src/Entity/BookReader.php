@@ -11,15 +11,8 @@ use Ramsey\Uuid\Uuid;
 #[ORM\Entity(repositoryClass: BookReaderRepository::class)]
 class BookReader extends Entity implements DomainEventSubscriber
 {
-    #[ORM\OneToOne(targetEntity: Book::class, mappedBy: 'BookReader')]
-    #[ORM\Column(type: "UuidType")]
     private Uuid $book_id;
-    
-    #[ORM\OneToOne(targetEntity: User::class, mappedBy: 'BookReader')]
-    #[ORM\Column(type: "UuidType")]
     private Uuid $user_id;
-
-    #[ORM\Column(length: 4096, nullable: true)]
     private ?string $commentary = null;
 
     public function getId(): ?int

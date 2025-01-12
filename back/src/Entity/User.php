@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Domain\DomainEvent;
-use App\Domain\DomainEventSubscriber;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -12,7 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
 class User extends Entity
 {
 
-    #[ORM\Column(length: 255)]
     private string $email;
 
 

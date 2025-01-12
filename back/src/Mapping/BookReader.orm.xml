@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <doctrine-mapping
+    xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+    https://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
+    
+    <entity name="App\Entity\BookReader" table="BookReader" repository-class="App\Repository\BookReaderRepository">
+        
+        <one-to-one field="book_id" target-entity="Book" inversed-by="BookReader">
+            <join-column name="book_id" referenced-column-name="id" />
+        </one-to-one>
+
+        <one-to-one field="user_id" target-entity="User" inversed-by="BookReader">
+            <join-column name="user_id" referenced-column-name="id" />
+        </one-to-one>
+
+        <field name="commentary" type="string" length="4096" column="commentary" nullable="true"/>
+        
+    </entity>
+</doctrine-mapping>

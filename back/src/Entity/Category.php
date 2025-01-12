@@ -14,13 +14,8 @@ class Category extends Entity implements DomainEventSubscriber
         parent::__construct();
     }
 
-    #[ORM\Column(length: 255, nullable: false)]
     private string $name = "";
-
-    #[ORM\Column(length: 4096, nullable: true)]
     private ?string $description = null;
-
-    #[ORM\Column(nullable: false)]
     private bool $active = false;
 
     public function getName() : string

@@ -6,7 +6,7 @@ namespace App\Tests\Repository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-abstract class ModelProjections extends ServiceEntityRepository
+class ModelProjections extends ServiceEntityRepository
 {
     protected function __construct(ManagerRegistry $registry ,string $entity )
     {

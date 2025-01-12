@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <doctrine-mapping
+    xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+    https://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
+
+    <entity name="App\Entity\Book" table="Book"  repository-class="App\Repository\BookRepository">
+
+        <field name="title" type="string" length="255" column="title" nullable="false"/>
+        <field name="description" type="string" length="4096" column="description" nullable="true"/>
+        <field name="isbn" type="string" length="13" column="isbn" nullable="false"/>
+        <field name="isbn13" type="string" length="13" column="isbn13" nullable="true"/>
+
+    </entity>
+
+</doctrine-mapping>

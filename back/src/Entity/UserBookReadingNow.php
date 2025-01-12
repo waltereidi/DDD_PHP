@@ -10,16 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: UserBookReadingNowRepository::class)]
 class UserBookReadingNow extends Entity implements DomainEventSubscriber
 {
-    
-    #[ORM\Column]
-    #[ORM\OneToOne(targetEntity: User::class, mappedBy: 'UserBookReadingNow')]
     private int $user_id;
-
-    #[ORM\Column]
-    #[ORM\OneToOne(targetEntity: Book::class, mappedBy: 'UserBookReadingNow')]
     private int $book_id;
-
-    #[ORM\Column]
     private bool $active = true;
 
     public function getId(): ?int
