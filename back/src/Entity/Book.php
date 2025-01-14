@@ -15,11 +15,6 @@ class Book extends Entity implements DomainEventSubscriber
     private string $isbn;
     private ?string $isbn13 = null;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
     public function getTitle(): ?string
     {
         return $this->title;

@@ -15,6 +15,7 @@ run:
 	-p 8001:8001 \
 	-p 5432:5432 \
 	-p 5173:5173 \
+	-p 55555:55555 \
 	--volume=./../back:/var/www/back \
 	--volume=./../front:/var/www/front \
 	--volume=./docker/back.conf:/etc/nginx/sites-available/back.conf \

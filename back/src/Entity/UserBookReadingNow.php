@@ -14,11 +14,6 @@ class UserBookReadingNow extends Entity implements DomainEventSubscriber
     private int $book_id;
     private bool $active = true;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
     public function getUserId(): ?int
     {
         return $this->user_id;

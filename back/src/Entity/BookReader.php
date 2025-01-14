@@ -15,11 +15,6 @@ class BookReader extends Entity implements DomainEventSubscriber
     private Uuid $user_id;
     private ?string $commentary = null;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
     public function getBookId(): Uuid
     {
         return $this->book_id;
