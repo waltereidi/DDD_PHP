@@ -4,7 +4,6 @@ use App\Domain\AggregateRoot;
 use App\Domain\Books\Events\UserAddedBook;
 use App\Repository\DomainRepository\BookDomainRepository;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class BookDomain extends AggregateRoot {
     private readonly BookDomainRepository $bookDomainRepository;

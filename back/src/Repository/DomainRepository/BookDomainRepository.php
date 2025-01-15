@@ -8,27 +8,29 @@ use App\Entity\BookReader;
 use App\Entity\Category;
 use App\Entity\User;
 use App\Entity\UserBookReadingNow;
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityRepository;
+use App\Repository as Repository;
+use Doctrine\Persistence\ManagerRegistry;
 
-class BookDomainRepository {
+class BookDomainRepository 
+{
 
-    public readonly EntityRepository $bookRepository;
-    public readonly EntityRepository $bookCategoryRepository;
-    public readonly EntityRepository $categoryRepository;
-    public readonly EntityRepository $userBookReadingNowRepository;
-    public readonly EntityRepository $userRepository;
-    public readonly EntityRepository $bookReaderRepository;
+    public readonly Repository\BookRepository $bookRepository;
+    public readonly Repository\BookCategoryRepository $bookCategoryRepository;
+    public readonly Repository\CategoryRepository $categoryRepository;
+    public readonly Repository\UserBookReadingNowRepository $userBookReadingNowRepository;
+    public readonly Repository\UserRepository $userRepository;
+    public readonly Repository\BookReaderRepository $bookReaderRepository;
     
-    public function __construct(EntityManagerInterface $entityManagerInterface){
-        $this->bookRepository = $entityManagerInterface->getRepository(Book::class);
-        $this->bookCategoryRepository = $entityManagerInterface->getRepository(BookCategory::class);
-        $this->categoryRepository = $entityManagerInterface->getRepository(Category::class);
-        $this->userBookReadingNowRepository = $entityManagerInterface->getRepository(UserBookReadingNow::class);
-        $this->userRepository = $entityManagerInterface->getRepository(User::class);
-        $this->bookReaderRepository = $entityManagerInterface->getRepository(BookReader::class);
+    public function __construct(ManagerRegistry $registry)
+    {
+        $this->bookRepository = new Repository\BookRepository($registry);
+        $this->bookCategoryRepository = new Repository\BookCategoryRepository($registry);
+        $this->categoryRepository = new Repository\CategoryRepository($registry); 
+        $this->userBookReadingNowRepository = new Repository\UserBookReadingNowRepository($registry);
+        $this->userRepository = new Repository\UserRepository($registry); 
+        $this->bookReaderRepository = new Repository\BookReaderRepository($registry); 
     }
-
+    
 
 
 }
