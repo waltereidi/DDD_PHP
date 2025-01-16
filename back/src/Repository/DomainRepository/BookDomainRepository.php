@@ -10,6 +10,7 @@ use App\Entity\User;
 use App\Entity\UserBookReadingNow;
 use App\Repository as Repository;
 use Doctrine\Persistence\ManagerRegistry;
+use \Doctrine\ORM\Query\Expr as Expr;
 
 class BookDomainRepository 
 {
@@ -31,6 +32,18 @@ class BookDomainRepository
         $this->bookReaderRepository = new Repository\BookReaderRepository($registry); 
     }
     
-
+    public function getLeftBarCategories()
+    {
+        return $this
+            ->categoryRepository
+            ->createQueryBuilder('cat')
+            ->select(select: 'cat')
+            ->leftjoin(join: 'App\Entity\BookCategory'
+            , alias: 'bc' 
+            ,conditionType: Expr\Join::WITH 
+            ,condition: 'bc.category_id = cat.id')
+            ->getQuery()
+            ->getResult();
+    }
 
 }
