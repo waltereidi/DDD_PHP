@@ -2,6 +2,7 @@
 
 namespace App\Repository\DomainRepository;
 
+use App\Contracts\Home\V1\GetLeftBarCategories;
 use App\Entity\Book;
 use App\Entity\BookCategory;
 use App\Entity\BookReader;
@@ -9,6 +10,7 @@ use App\Entity\Category;
 use App\Entity\User;
 use App\Entity\UserBookReadingNow;
 use App\Repository as Repository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use \Doctrine\ORM\Query\Expr as Expr;
 
@@ -34,16 +36,40 @@ class BookDomainRepository
     
     public function getLeftBarCategories()
     {
-        return $this
-            ->categoryRepository
+        return $this->getLeftBarCategories_query()
+            ->groupBy('cat.id', 'cat.name')
+            ->select('cat.name' , 'count(cat.name)')
+            ->orderBy('cat.name')
+            ->getQuery()
+            ->getResult();
+    }
+    private function getLeftBarCategories_query():QueryBuilder       
+    {
+        return $this->categoryRepository
             ->createQueryBuilder('cat')
-            ->select(select: 'cat')
-            ->leftjoin(join: 'App\Entity\BookCategory'
+            ->join(join: 'App\Entity\BookCategory'
             , alias: 'bc' 
             ,conditionType: Expr\Join::WITH 
             ,condition: 'bc.category_id = cat.id')
-            ->getQuery()
-            ->getResult();
+            ->join('App\Entity\Book', 
+                'b' , 
+                Expr\Join::WITH , 
+                condition: 'b.id = bc.book_id'
+            );
+    }
+
+    public function getMainPageBooks()
+    {
+        return $this->bookRepository
+        ->createQueryBuilder('b')
+        ->select( 'b.id'  )
+        ->leftjoin(join: 'App\Entity\UserBookReadingNow'
+        , alias: 'ubrn' 
+        ,conditionType: Expr\Join::WITH 
+        ,condition: 'ubrn.book_id = b.id')
+        
+        ->getQuery()
+        ->getResult();
     }
 
 }

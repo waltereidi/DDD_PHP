@@ -32,15 +32,17 @@ class BookService implements ApplicationServiceInterface
             default: throw new \InvalidArgumentException('Invalid command '.$command::class);
         }
     }
-    protected function getLeftBarCategories(V1\GetBooks $command) : object
+    protected function getLeftBarCategories(V1\GetLeftBarCategories $command) : object
     {
         return $this
             ->repository
             ->getLeftBarCategories();
     }
-    protected function getMainPageBooks(V1\GetBooksAndCategories $command) : object
+    protected function getMainPageBooks(V1\GetMainPageBooks $command) : object
     {
-
+        return $this
+        ->repository
+        ->getMainPageBooks();
     }
 
 }
