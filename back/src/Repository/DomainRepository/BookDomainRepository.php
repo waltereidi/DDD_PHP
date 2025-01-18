@@ -15,6 +15,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use \Doctrine\ORM\Query\Expr as Expr;
 
 class BookDomainRepository 
+
 {
 
     public readonly Repository\BookRepository $bookRepository;
@@ -23,7 +24,7 @@ class BookDomainRepository
     public readonly Repository\UserBookReadingNowRepository $userBookReadingNowRepository;
     public readonly Repository\UserRepository $userRepository;
     public readonly Repository\BookReaderRepository $bookReaderRepository;
-    
+
     public function __construct(ManagerRegistry $registry)
     {
         $this->bookRepository = new Repository\BookRepository($registry);
@@ -32,6 +33,36 @@ class BookDomainRepository
         $this->userBookReadingNowRepository = new Repository\UserBookReadingNowRepository($registry);
         $this->userRepository = new Repository\UserRepository($registry); 
         $this->bookReaderRepository = new Repository\BookReaderRepository($registry); 
+    }
+
+    
+    public function getMainPageBooks()
+    {
+        return $this->getMainPageBooks_query()
+            ->select('');
+    }
+    
+    private function booksCategoryUserBookReadingNow_query() : QueryBuilder
+    {
+        return $this->bookRepository
+        ->createQueryBuilder('b')
+        ->join(
+            join: 'App\Entity\BookCategory',
+            alias: 'bc',
+            conditionType: Expr\Join::WITH,
+            condition: 'bc.book_id = b.id'
+        )
+        ->leftjoin( join: 'App\Entity\UserBookReadingNow',
+            alias: 'ubrn',
+            conditionType: Expr\Join::WITH ,
+            condition: 'ubrn.book_id = b.id'
+        )
+        ->leftjoin(
+            join: 'App\Entity\User',
+            alias: 'u',
+            conditionType: Expr\Join::WITH,
+            condition: 'u.id = ubrn.user_id'
+        );
     }
     
     public function getLeftBarCategories()
@@ -43,7 +74,7 @@ class BookDomainRepository
             ->getQuery()
             ->getResult();
     }
-    private function getLeftBarCategories_query():QueryBuilder       
+    private function booksWithCategory_query():QueryBuilder 
     {
         return $this->categoryRepository
             ->createQueryBuilder('cat')
@@ -57,19 +88,4 @@ class BookDomainRepository
                 condition: 'b.id = bc.book_id'
             );
     }
-
-    public function getMainPageBooks()
-    {
-        return $this->bookRepository
-        ->createQueryBuilder('b')
-        ->select( 'b.id'  )
-        ->leftjoin(join: 'App\Entity\UserBookReadingNow'
-        , alias: 'ubrn' 
-        ,conditionType: Expr\Join::WITH 
-        ,condition: 'ubrn.book_id = b.id')
-        
-        ->getQuery()
-        ->getResult();
-    }
-
 }
