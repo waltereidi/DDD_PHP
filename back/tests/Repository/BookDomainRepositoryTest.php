@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Tests\Repository;
-use App\Repository\DomainRepository\BookDomainRepository;
+use App\Repository\DomainRepository\BookDomain\BookDomainRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -29,7 +29,5 @@ class BookDomainRepositoryTest extends KernelTestCase
 
         assertNotNull($result);
     }
-
-    
 
 }

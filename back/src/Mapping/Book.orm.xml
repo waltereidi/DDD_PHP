@@ -12,6 +12,7 @@
         <field name="isbn" type="string" length="13" column="isbn" nullable="false"/>
         <field name="isbn13" type="string" length="13" column="isbn13" nullable="true"/>
 
+        
     </entity>
 
 </doctrine-mapping>
