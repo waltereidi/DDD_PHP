@@ -11,22 +11,22 @@ use Ramsey\Uuid\Uuid;
 #[ORM\Entity(repositoryClass: BookReaderRepository::class)]
 class BookReader extends Entity implements DomainEventSubscriber
 {
-    private Uuid $book_id;
-    private Uuid $user_id;
+    private Book $book;
+    private User $user;
     private ?string $commentary = null;
 
-    public function getBookId(): Uuid
+    public function getBookId(): Book
     {
-        return $this->book_id;
+        return $this->book;
     }
 
     public function getCommentary(): ?string
     {
         return $this->commentary;
     }
-    public function getUserId(): Uuid
+    public function getUser(): User
     {
-        return $this->user_id;
+        return $this->user;
     }
 
     public function handle(DomainEvent $aDomainEvent) :void

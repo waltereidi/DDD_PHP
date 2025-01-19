@@ -4,6 +4,8 @@ namespace App\Repository\Types;
 
 use Doctrine\DBAL\Types\StringType;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Ramsey\Uuid\Lazy\LazyUuidFromString;
+use Ramsey\Uuid\Rfc4122\UuidInterface;
 use Ramsey\Uuid\Uuid;
 
 
@@ -18,11 +20,10 @@ class UuidType extends StringType
      * @param mixed $value
      * @return UuidType
      */
-    public function convertToPHPValue($value, AbstractPlatform $platform) : Uuid
+    public function convertToPHPValue($value, AbstractPlatform $platform) : LazyUuidFromString
     {
         return Uuid::fromString($value);
     }
-
     /**
      * @param mixed $value
      * @return string

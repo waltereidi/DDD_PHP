@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20250117014907 extends AbstractMigration
+final class Version20250119211756 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -38,6 +38,12 @@ final class Version20250117014907 extends AbstractMigration
         $this->addSql('COMMENT ON COLUMN Category.id IS \'(DC2Type:id)\'');
         $this->addSql('CREATE TABLE "User" (id VARCHAR(255) NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('COMMENT ON COLUMN "User".id IS \'(DC2Type:id)\'');
+        $this->addSql('CREATE TABLE User_Book_Reading_Now (id VARCHAR(255) NOT NULL, user_id VARCHAR(255) DEFAULT NULL, book_id VARCHAR(255) DEFAULT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, active BOOLEAN NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_E9B9217A76ED395 ON User_Book_Reading_Now (user_id)');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_E9B921716A2B381 ON User_Book_Reading_Now (book_id)');
+        $this->addSql('COMMENT ON COLUMN User_Book_Reading_Now.id IS \'(DC2Type:id)\'');
+        $this->addSql('COMMENT ON COLUMN User_Book_Reading_Now.user_id IS \'(DC2Type:id)\'');
+        $this->addSql('COMMENT ON COLUMN User_Book_Reading_Now.book_id IS \'(DC2Type:id)\'');
         $this->addSql('CREATE TABLE messenger_messages (id BIGSERIAL NOT NULL, body TEXT NOT NULL, headers TEXT NOT NULL, queue_name VARCHAR(190) NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, available_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, delivered_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_75EA56E0FB7336F0 ON messenger_messages (queue_name)');
         $this->addSql('CREATE INDEX IDX_75EA56E0E3BD61CE ON messenger_messages (available_at)');
@@ -57,6 +63,8 @@ final class Version20250117014907 extends AbstractMigration
         $this->addSql('ALTER TABLE Book_Category ADD CONSTRAINT FK_55BB263B12469DE2 FOREIGN KEY (category_id) REFERENCES Category (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE Book_Reader ADD CONSTRAINT FK_64D8085016A2B381 FOREIGN KEY (book_id) REFERENCES Book (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE Book_Reader ADD CONSTRAINT FK_64D80850A76ED395 FOREIGN KEY (user_id) REFERENCES "User" (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE User_Book_Reading_Now ADD CONSTRAINT FK_E9B9217A76ED395 FOREIGN KEY (user_id) REFERENCES "User" (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE User_Book_Reading_Now ADD CONSTRAINT FK_E9B921716A2B381 FOREIGN KEY (book_id) REFERENCES Book (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
     }
 
     public function down(Schema $schema): void
@@ -67,11 +75,14 @@ final class Version20250117014907 extends AbstractMigration
         $this->addSql('ALTER TABLE Book_Category DROP CONSTRAINT FK_55BB263B12469DE2');
         $this->addSql('ALTER TABLE Book_Reader DROP CONSTRAINT FK_64D8085016A2B381');
         $this->addSql('ALTER TABLE Book_Reader DROP CONSTRAINT FK_64D80850A76ED395');
+        $this->addSql('ALTER TABLE User_Book_Reading_Now DROP CONSTRAINT FK_E9B9217A76ED395');
+        $this->addSql('ALTER TABLE User_Book_Reading_Now DROP CONSTRAINT FK_E9B921716A2B381');
         $this->addSql('DROP TABLE Book');
         $this->addSql('DROP TABLE Book_Category');
         $this->addSql('DROP TABLE Book_Reader');
         $this->addSql('DROP TABLE Category');
         $this->addSql('DROP TABLE "User"');
+        $this->addSql('DROP TABLE User_Book_Reading_Now');
         $this->addSql('DROP TABLE messenger_messages');
     }
 }

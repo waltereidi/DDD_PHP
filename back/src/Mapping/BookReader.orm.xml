@@ -7,11 +7,11 @@
     
     <entity name="App\Entity\BookReader" table="Book_Reader" repository-class="App\Repository\BookReaderRepository">
         
-        <one-to-one field="book_id" target-entity="Book" inversed-by="Book_Reader">
+        <one-to-one field="book" target-entity="Book" inversed-by="Book_Reader">
             <join-column name="book_id" referenced-column-name="id" />
         </one-to-one>
 
-        <one-to-one field="user_id" target-entity="User" inversed-by="Book_Reader">
+        <one-to-one field="user" target-entity="User" inversed-by="Book_Reader">
             <join-column name="user_id" referenced-column-name="id" />
         </one-to-one>
 

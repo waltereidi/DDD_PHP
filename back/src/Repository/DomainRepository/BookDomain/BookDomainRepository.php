@@ -2,17 +2,18 @@
 
 namespace App\Repository\DomainRepository\BookDomain;
 
+use App\Contracts\UI\Pagination;
+use App\Entity\Book;
 use App\Repository as Repository;
 use Doctrine\Persistence\ManagerRegistry;
-
-class BookDomainRepository implements BookDomainRepositoryInterface
+class BookDomainRepository 
 {
-    private readonly Repository\BookRepository $bookRepository;
-    private readonly Repository\BookCategoryRepository $bookCategoryRepository;
-    private readonly Repository\CategoryRepository $categoryRepository;
-    private readonly Repository\UserBookReadingNowRepository $userBookReadingNowRepository;
-    private readonly Repository\UserRepository $userRepository;
-    private readonly Repository\BookReaderRepository $bookReaderRepository;
+    public readonly Repository\BookRepository $bookRepository;
+    public readonly Repository\BookCategoryRepository $bookCategoryRepository;
+    public readonly Repository\CategoryRepository $categoryRepository;
+    public readonly Repository\UserBookReadingNowRepository $userBookReadingNowRepository;
+    public readonly Repository\UserRepository $userRepository;
+    public readonly Repository\BookReaderRepository $bookReaderRepository;
 
     public function __construct(ManagerRegistry $registry)
     {
@@ -23,23 +24,22 @@ class BookDomainRepository implements BookDomainRepositoryInterface
         $this->userRepository = new Repository\UserRepository($registry); 
         $this->bookReaderRepository = new Repository\BookReaderRepository($registry); 
     }
-
-    public function getUserReadingBooks() : UserReadingBooks   
+    public function getMainPageBooks(Pagination $pagination): array
     {
-        return new UserReadingBooks(        
-            book: $this->bookRepository, 
-            bookCategory: $this->bookCategoryRepository, 
-            userBookReadingNow: $this->userBookReadingNowRepository, 
-            user: $this->userRepository, 
-            bookReader: $this->bookReaderRepository
-        );
+        return $this->bookRepository
+            ->createQueryBuilder('b')
+            ->setFirstResult($pagination->getOffSet())
+            ->setMaxResults($pagination->getMaxResults())
+            ->getQuery()
+            ->getResult();
     }
-    
-    public function getCategoryBooks() : CategoryBooks
+    public function getLeftSideCategories() : array
     {
-        return new CategoryBooks(
-            category: $this->categoryRepository,
-            bookCategory: $this->bookCategoryRepository
-        );
+        return $this->bookCategoryRepository
+            ->createQueryBuilder('bc')
+            ->select('count(bc.book_id)' , 'bc.category_id')
+            ->groupBy('bc.category_id')
+            ->getQuery()
+            ->getResult();
     }
 }

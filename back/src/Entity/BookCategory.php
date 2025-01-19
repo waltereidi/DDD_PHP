@@ -6,22 +6,25 @@ use App\Domain\DomainEvent;
 use App\Domain\DomainEventSubscriber;
 use App\Repository\BookCategoryRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Lazy\LazyUuidFromString;
 use Ramsey\Uuid\Uuid;
 
 #[ORM\Entity(repositoryClass: BookCategoryRepository::class)]
 class BookCategory extends Entity implements DomainEventSubscriber
 {
-    private Uuid $book_id;
-    private Uuid  $category_id;
-
-    public function getBookId(): ?Uuid
+    private LazyUuidFromString $book_id; 
+    private LazyUuidFromString $category_id;
+    private Book $book;
+    private Category  $category;
+    
+    public function getBook(): ?Book
     {
-        return $this->book_id;
+        return $this->book;
     }
 
-    public function getCategorId(): ?Uuid
+    public function getCategory(): ?Category
     {
-        return $this->category_id;
+        return $this->category;
     }
 
     public function handle(DomainEvent $aDomainEvent) :void

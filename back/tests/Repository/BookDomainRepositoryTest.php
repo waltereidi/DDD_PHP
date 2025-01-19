@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Tests\Repository;
+use App\Contracts\UI\Pagination;
 use App\Repository\DomainRepository\BookDomain\BookDomainRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -22,11 +23,18 @@ class BookDomainRepositoryTest extends KernelTestCase
 
         $this->repos = new BookDomainRepository( $this->managerRegistry );
     }
-    public function testAddNew()
+    public function testGetMainPage()
     {
         $result = $this->repos
-            ->getLeftBarCategories();
+            ->getMainPageBooks(new Pagination(1 , 10));
 
+        assertNotNull($result);
+    }
+    public function testGetLeftSideCategories()
+    {
+        $result = $this->repos
+            ->getLeftSideCategories();
+            
         assertNotNull($result);
     }
 

@@ -10,17 +10,17 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: UserBookReadingNowRepository::class)]
 class UserBookReadingNow extends Entity implements DomainEventSubscriber
 {
-    private int $user_id;
-    private int $book_id;
+    private User $user;
+    private Book $book;
     private bool $active = true;
 
-    public function getUserId(): ?int
+    public function getUser(): User
     {
-        return $this->user_id;
+        return $this->user;
     }
-    public function getBookId(): ?int
+    public function getBookId(): Book
     {
-        return $this->book_id;
+        return $this->book;
     }
     public function isActive(): ?bool
     {
