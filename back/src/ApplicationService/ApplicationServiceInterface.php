@@ -8,5 +8,5 @@ namespace App\ApplicationService;
  */
 interface ApplicationServiceInterface
 {
-    public function handle(object $command) : object ;   
+    public function handle(?object $contract , string $command) : mixed ;   
 }

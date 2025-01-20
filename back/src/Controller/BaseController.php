@@ -8,12 +8,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 abstract class BaseController extends AbstractController
 {
-    
-    protected function handle(object $command , ApplicationServiceInterface $asi ) : Response
+    private readonly ApplicationServiceInterface $asi;
+    public function __construct(ApplicationServiceInterface $applicationService)
+    {   
+        $this->asi = $applicationService;
+    }
+    protected function handle(?object $contract ,string $command ) : Response
     {   
         try
         {
-            $response = $asi->handle($command);
+            $response = $this->asi->handle($contract,  $command);
             return new Response($response);
         }
         catch(\InvalidArgumentException $ex )

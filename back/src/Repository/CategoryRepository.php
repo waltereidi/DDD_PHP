@@ -12,4 +12,13 @@ class CategoryRepository extends ModelProjections
     {
         parent::__construct($registry, Category::class);
     }
+
+    public function findByName(array $name)
+    {
+        $this->repository
+            ->categoryRepository
+            ->findBy(array('name' => $name));
+        
+    }
+
 }

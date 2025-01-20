@@ -2,11 +2,10 @@
 namespace App\Domain\Books;
 use App\Domain\AggregateRoot;
 use App\Domain\Books\Events\UserAddedBook;
-use App\Repository\DomainRepository\BookDomainRepository;
 
 
 class BookDomain extends AggregateRoot {
-    private readonly BookDomainRepository $bookDomainRepository;
+
     
     
     public function __construct(BookId $bookId ) 

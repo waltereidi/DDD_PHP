@@ -1,16 +1,20 @@
 <?php
 namespace App\ApplicationService;
 
+use App\Contracts\UI\Pagination;
 use App\Domain\Books\BookDomain;
-use App\Repository\DomainRepository\BookDomainRepository;
+use App\Domain\Books\BookId;
+use App\Entity\Book;
 use Symfony\Component\HttpKernel\KernelInterface;
 use App\ApplicationService\ApplicationServiceInterface;
 use App\Contracts\Home\V1 as V1;
+use App\Repository\DomainRepository\BookDomain\BookDomainRepository;
+
 class BookService implements ApplicationServiceInterface
 {
     protected readonly KernelInterface $kernel;
     protected readonly BookDomainRepository $repository;
-    protected readonly BookDomain $domain;
+    protected BookDomain $domain;
     public function __construct(KernelInterface $kernel)
     {
         $this->kernel = $kernel;
@@ -20,29 +24,40 @@ class BookService implements ApplicationServiceInterface
             ->get('doctrine');
         
         $this->repository = new BookDomainRepository($managerRegistry);
-
     }
+
     //TODO add objects contracts delegated from controller
-    public function handle(object $command): object
+    public function handle(?object $contract ,string $command):mixed
     {
-        switch($command::class)
+        switch($command)
         {
-            case V1\GetLeftBarCategories::class: return $this->getLeftBarCategories($command);
-            case V1\GetMainPageBooks::class: return $this->getMainPageBooks($command);
-            default: throw new \InvalidArgumentException('Invalid command '.$command::class);
+            case 'getLeftBarCategories' : return $this->getLeftBarCategories();
+            case 'getMainPageBooks' : return $this->getMainPageBooks($contract);
+            case V1\CreateBook::class: return $this->createBook($contract);
+            default: throw new \InvalidArgumentException('Invalid command '.$command);
         }
     }
-    protected function getLeftBarCategories(V1\GetLeftBarCategories $command) : object
+    protected function createBook(V1\CreateBook $request):?Book
+    {
+        $book = new BookDomain(BookId::create());
+        
+        return null;
+
+    }
+    protected function getLeftBarCategories() : array
     {
         return $this
             ->repository
-            ->getLeftBarCategories();
+            ->getLeftSideCategories();
     }
-    protected function getMainPageBooks(V1\GetMainPageBooks $command) : object
+    protected function getMainPageBooks(Pagination $pagination) : array
     {
         return $this
-        ->repository
-        ->getMainPageBooks();
+            ->repository
+            ->getMainPageBooks($pagination);
     }
+
+    
+
 
 }
