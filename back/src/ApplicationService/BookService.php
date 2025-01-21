@@ -1,9 +1,12 @@
 <?php
 namespace App\ApplicationService;
 
+use ApiPlatform\Metadata\Exception\ItemNotFoundException;
+use App\Contracts\Home\V1\CreateBook;
 use App\Contracts\UI\Pagination;
 use App\Domain\Books\BookDomain;
 use App\Domain\Books\BookId;
+use App\Domain\Books\Events\LoadBookDomain;
 use App\Entity\Book;
 use Symfony\Component\HttpKernel\KernelInterface;
 use App\ApplicationService\ApplicationServiceInterface;
@@ -23,6 +26,8 @@ class BookService implements ApplicationServiceInterface
             ->getContainer()
             ->get('doctrine');
         
+        $this->domain = new BookDomain(BookId::create() , $this->repository);
+        
         $this->repository = new BookDomainRepository($managerRegistry);
     }
 
@@ -39,8 +44,18 @@ class BookService implements ApplicationServiceInterface
     }
     protected function createBook(V1\CreateBook $request):?Book
     {
-        $book = new BookDomain(BookId::create());
         
+        
+        if($request->book->id != null ){
+            
+            $book = $this->repository
+                ->bookRepository
+                ->findOneBy(['id'=> $request->book->id]) 
+                ?? throw new ItemNotFoundException("could not find". $request->book->id);            
+        }
+
+        $this->domain->recordApplyAndPublishThat(new LoadBookDomain($book));
+
         return null;
 
     }

@@ -30,7 +30,18 @@ class Book extends Entity implements DomainEventSubscriber
      * @var UserBookReadingNow
      */
     private ?Collection  $reading_now = null; 
-
+    public function getCategories(): array
+    {
+        return $this->categories->getValues();
+    }
+    public function getBookReader():array
+    {
+        return $this->book_reader->getValues();
+    }
+    public function getReadingNow() :array
+    {
+        return $this->reading_now->getValues();
+    }
     public function getTitle(): ?string
     {
         return $this->title;

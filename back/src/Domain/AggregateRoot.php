@@ -17,7 +17,7 @@ abstract class AggregateRoot
         $this->id = $id;
     }
     
-    protected function recordApplyAndPublishThat(DomainEvent $event): void {
+    public function recordApplyAndPublishThat(DomainEvent $event): void {
         $this->recordThat($event);
         $this->applyThat($event);
         $this->publishThat($event);
