@@ -3,9 +3,10 @@
 namespace App\Repository\DomainRepository\BookDomain;
 
 use App\Contracts\UI\Pagination;
-use App\Entity\Book;
 use App\Repository as Repository;
+use Doctrine\Persistence\ConnectionRegistry;
 use Doctrine\Persistence\ManagerRegistry;
+
 class BookDomainRepository 
 {
     public readonly Repository\BookRepository $bookRepository;
@@ -14,6 +15,7 @@ class BookDomainRepository
     public readonly Repository\UserBookReadingNowRepository $userBookReadingNowRepository;
     public readonly Repository\UserRepository $userRepository;
     public readonly Repository\BookReaderRepository $bookReaderRepository;
+    public readonly ManagerRegistry $manager;
 
     public function __construct(ManagerRegistry $registry)
     {
@@ -23,7 +25,10 @@ class BookDomainRepository
         $this->userBookReadingNowRepository = new Repository\UserBookReadingNowRepository($registry);
         $this->userRepository = new Repository\UserRepository($registry); 
         $this->bookReaderRepository = new Repository\BookReaderRepository($registry); 
+
+        $this->manager = $registry;
     }
+
     public function getMainPageBooks(Pagination $pagination): array
     {
         return $this->bookRepository

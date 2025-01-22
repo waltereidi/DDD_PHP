@@ -2,7 +2,6 @@
 namespace App\ApplicationService;
 
 use ApiPlatform\Metadata\Exception\ItemNotFoundException;
-use App\Contracts\Home\V1\CreateBook;
 use App\Contracts\UI\Pagination;
 use App\Domain\Books\BookDomain;
 use App\Domain\Books\BookId;
@@ -26,6 +25,7 @@ class BookService implements ApplicationServiceInterface
             ->getContainer()
             ->get('doctrine');
         
+
         $this->domain = new BookDomain(BookId::create() , $this->repository);
         
         $this->repository = new BookDomainRepository($managerRegistry);
@@ -42,10 +42,8 @@ class BookService implements ApplicationServiceInterface
             default: throw new \InvalidArgumentException('Invalid command '.$command);
         }
     }
-    protected function createBook(V1\CreateBook $request):?Book
+    protected function createBook(V1\CreateBook $request):Book
     {
-        
-        
         if($request->book->id != null ){
             
             $book = $this->repository
@@ -54,11 +52,15 @@ class BookService implements ApplicationServiceInterface
                 ?? throw new ItemNotFoundException("could not find". $request->book->id);            
         }
 
-        $this->domain->recordApplyAndPublishThat(new LoadBookDomain($book));
+        $this->domain->apply(new LoadBookDomain($book));
 
-        return null;
+        $this->domain->saveEntities();
 
+        return $this->repository
+            ->bookRepository
+            ->findOneBy(['id' => $this->domain->getBook()->id]);      
     }
+
     protected function getLeftBarCategories() : array
     {
         return $this

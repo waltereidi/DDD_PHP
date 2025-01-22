@@ -12,15 +12,6 @@ class ModelProjections extends ServiceEntityRepository
     {
         parent::__construct($registry, $entity);
     }
-
-    public function getById(int $id)
-    {
-        return $this->createQueryBuilder('c')
-            ->where('c.id = :val')
-            ->setParameter('val' , $id )
-            ->getQuery()
-            ->getResult();
-    }
     public function Merge(object $entity)  : object
     {     
         $entityManager = $this->getEntityManager();

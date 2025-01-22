@@ -7,32 +7,45 @@ use App\Domain\DomainEvent;
 use App\Entity as Entity;
 use App\Repository\DomainRepository\BookDomain\BookDomainRepository;
 
-
 class BookDomain extends AggregateRoot {
-
     protected readonly BookDomainRepository $repository;    
     protected Entity\Book $book;
-    /**
-     * Refers to categories assigned to this book
-     * @var Entity\Category
-     */
+    /** @var Entity\Category */
     protected array $categories; 
-    /**
-     * Refers to users who added notes to this book
-     * @var Entity\BookReader
-     */
+    /** @var Entity\BookReader */
     protected array $bookReader;
-    /**
-     * Refers to user reading this book now
-     * @var Entity\UserBookReadingNow
-     */
+    /** @var Entity\UserBookReadingNow */
     protected array $userBookReadingNow;
-    protected function applyLoadDomain(LoadBookDomain $book){
-        $this->book = $book->book;
-        $this->categories = $book->book;
-
+    public function getBook():Entity\Book 
+    {
+        return $this->book;
+    }
+    public function apply(DomainEvent $e): void
+    {
+        $this->recordApplyAndPublishThat($e);
     }
 
+    protected function applyLoadDomain(LoadBookDomain $e){
+        $this->book = $e->book;
+        $this->categories = $e->book->getCategories();
+        $this->userBookReadingNow = $e->book->getReadingNow();
+        $this->bookReader = $e->book->getBookReader();
+    }
+    public function saveEntities()
+    {
+        $this->repository->manager->getConnection()
+            ->beginTransaction();
+        try{
+
+
+            $this->repository->manager ->getConnection()
+                ->commit();
+
+        }catch(\Exception $e){
+            $this->repository->manager ->getConnection()
+                ->rollback();
+        }
+    }
     public function __construct(BookId $bookId  , BookDomainRepository $repository ) 
     {
         parent::__construct($bookId);
