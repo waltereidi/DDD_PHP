@@ -4,12 +4,13 @@ namespace App\Entity;
 
 use App\Domain\DomainEvent;
 use App\Domain\DomainEventSubscriber;
+use App\Domain\Subscriber;
 use App\Repository\BookReaderRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 
 #[ORM\Entity(repositoryClass: BookReaderRepository::class)]
-class BookReader extends Entity implements DomainEventSubscriber
+class BookReader extends Entity implements Subscriber
 {
     private Book $book;
     private User $user;

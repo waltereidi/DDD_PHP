@@ -4,11 +4,12 @@ namespace App\Entity;
 
 use App\Domain\DomainEvent;
 use App\Domain\DomainEventSubscriber;
+use App\Domain\Subscriber;
 use App\Repository\UserBookReadingNowRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UserBookReadingNowRepository::class)]
-class UserBookReadingNow extends Entity implements DomainEventSubscriber
+class UserBookReadingNow extends Entity implements Subscriber
 {
     private User $user;
     private Book $book;

@@ -5,10 +5,11 @@ namespace App\Entity;
 use App\Domain\Books\Events\CreateCategory;
 use App\Domain\DomainEvent;
 use App\Domain\DomainEventSubscriber;
+use App\Domain\Subscriber;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
-class Category extends Entity implements DomainEventSubscriber
+class Category extends Entity implements Subscriber
 {
     public function __construct() {
         parent::__construct();
