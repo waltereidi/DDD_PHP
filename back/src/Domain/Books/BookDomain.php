@@ -42,18 +42,18 @@ class BookDomain extends AggregateRoot
         $this->recordApplyAndPublishThat($e);
     }
 
-    protected function applyLoadDomain(LoadBookDomain $e){
+    protected function applyLoadBookDomain(LoadBookDomain $e){
+        
         $this->subscriber->subscribe($e->book);
-        
-        $this->categories = $e->book->getCategories();
-        $this->userBookReadingNow = $e->book->getReadingNow();
-        $this->bookReader = $e->book->getBookReader();
+        $d =$e->book->getCategories();
+        array_walk($e->book->getCategories() ,fn($item)
+            =>$this->subscriber->subscribe($item) );
+            
+        array_walk($e->book->getReadingNow() , fn($item , $key) 
+            => $this->subscriber->subscribe($item));         
 
-        
-        $this->subscriber->subscribe(new BookReader());
-        $this->subscriber->subscribe(new UserBookReadingNow());
-        $this->subscriber->subscribe(new Category());
-        $this->subscriber->subscribe(new BookCategory());
+        array_walk($e->book->getBookReader() , fn($item , $key) 
+            => $this->subscriber->subscribe($item));
     }
     public function saveEntities()
     {

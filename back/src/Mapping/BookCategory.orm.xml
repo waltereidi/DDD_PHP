@@ -11,13 +11,14 @@
         
         <field name="book_id"  type="string" length="255" column="book_id" nullable="false"/>
 
-        <one-to-one field="book" target-entity="Book" inversed-by="Book_Category">
+        <one-to-one field="book" target-entity="Book"  inversed-by="BookCategory" >
             <join-column name="book_id" referenced-column-name="id" />
         </one-to-one>
 
-        <one-to-one field="category" target-entity="Category" inversed-by="Book_Category">
+        <one-to-one field="category" target-entity="Category" inversed-by="BookCategory">
             <join-column name="category_id" referenced-column-name="id" />
         </one-to-one>
+
 
     </entity>
 </doctrine-mapping>

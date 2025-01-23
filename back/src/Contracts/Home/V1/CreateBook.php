@@ -16,11 +16,11 @@ class CreateBook
      * Refers to users who read this book
      * @var \App\Entity\BookReader
      */
-    private array  $book_reader = null; 
+    private array  $book_reader ; 
     /**
      * Refers to users who read this book
      * @var \App\Entity\UserBookReadingNow
      */
-    private array $reading_now = null;
+    private array $reading_now ;
 
 }

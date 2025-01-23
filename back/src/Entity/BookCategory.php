@@ -16,7 +16,8 @@ class BookCategory extends Entity implements Subscriber
     private LazyUuidFromString $book_id; 
     private LazyUuidFromString $category_id;
     private Book $book;
-    private Category  $category;
+    private Category $category;
+    
     
     public function getBook(): ?Book
     {

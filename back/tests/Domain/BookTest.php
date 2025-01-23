@@ -2,19 +2,38 @@
 
 use App\Domain\Books\BookDomain;
 use App\Domain\Books\BookId;
+use App\Domain\Books\Events\LoadBookDomain;
+use App\Repository\DomainRepository\BookDomain\BookDomainRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use PHPUnit\Framework\TestCase;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-final class BookTest extends TestCase
+final class BookTest extends KernelTestCase
 {
-    
-    public function testBookId(): void
+    private BookDomainRepository $repos;
+    private ?ManagerRegistry $managerRegistry;
+    private BookDomain $domain;         
+    protected function setUp(): void
     {
-        $e = new BookId("1");
-        $id = $e->create();
+        $kernel = self::bootKernel();
 
-        $bookAggregateRoot = new BookDomain($id);
-        
- 
+        $this->managerRegistry = $kernel
+            ->getContainer()
+            ->get('doctrine');
+
+        $this->repos = new BookDomainRepository( $this->managerRegistry );
+
+        $this->domain = new BookDomain( BookId::create() , $this->repos);
     }
+
+    public function testLoadDomainSubscribeEntities()
+    {
+        $books = $this->repos->bookRepository->findAll();
+        $dbooks = $this->repos->bookCategoryRepository->findAll();
+        $event = new LoadBookDomain(array_pop($books));
+        $this->domain->apply($event);
+
+    }
+    
     
 }

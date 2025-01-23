@@ -33,6 +33,7 @@ class Book extends Entity implements Subscriber
     private ?Collection  $reading_now = null; 
     public function getCategories(): array
     {
+        $c = $this->categories->count();
         return $this->categories->getValues();
     }
     public function getBookReader():array
