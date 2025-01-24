@@ -7,17 +7,18 @@
     
     <entity name="App\Entity\BookCategory" table="Book_Category" repository-class="App\Repository\BookCategoryRepository">
         
-        <field name="category_id"  type="string" length="255" column="category_id" nullable="false"/>
+        <field name="category_id"  type="UuidType" length="255" column="category_id" nullable="false"/>
         
-        <field name="book_id"  type="string" length="255" column="book_id" nullable="false"/>
+        <field name="book_id"  type="UuidType" length="255" column="book_id" nullable="false"/>
+       
+         <many-to-one field="book" target-entity="Book" inversed-by="BookCategory">
+            <join-column name="book_id" referenced-column-name="id" nullable="false"/>
+        </many-to-one>
 
-        <one-to-one field="book" target-entity="Book"  inversed-by="BookCategory" >
-            <join-column name="book_id" referenced-column-name="id" />
-        </one-to-one>
+        <many-to-one field="category" target-entity="Category"  inversed-by="BookCategory">
+            <join-column name="category_id" referenced-column-name="id" nullable="false"/>
+        </many-to-one> 
 
-        <one-to-one field="category" target-entity="Category" inversed-by="BookCategory">
-            <join-column name="category_id" referenced-column-name="id" />
-        </one-to-one>
 
 
     </entity>

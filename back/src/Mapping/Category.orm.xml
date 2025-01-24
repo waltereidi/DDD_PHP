@@ -10,6 +10,7 @@
         <field name="name" type="string" length="255" column="name" nullable="false"/>
         <field name="description" type="string" length="4096" column="description" nullable="true"/>
         <field name="active" type="boolean" column="active" nullable="false"/>
+        <one-to-one field="bookCategory" target-entity="BookCategory" mapped-by="BookCategory"/>
     </entity>
 
 </doctrine-mapping>

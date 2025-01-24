@@ -6,6 +6,7 @@ use App\Domain\DomainEvent;
 use App\Domain\DomainEventSubscriber;
 use App\Domain\Subscriber;
 use App\Repository\BookCategoryRepository;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Lazy\LazyUuidFromString;
 use Ramsey\Uuid\Uuid;
@@ -16,8 +17,7 @@ class BookCategory extends Entity implements Subscriber
     private LazyUuidFromString $book_id; 
     private LazyUuidFromString $category_id;
     private Book $book;
-    private Category $category;
-    
+    private Collection $category;
     
     public function getBook(): ?Book
     {
@@ -26,7 +26,8 @@ class BookCategory extends Entity implements Subscriber
 
     public function getCategory(): ?Category
     {
-        return $this->category;
+        $r = $this->category->getValues();
+        return $r[0];
     }
 
     public function handle(DomainEvent $aDomainEvent) :void

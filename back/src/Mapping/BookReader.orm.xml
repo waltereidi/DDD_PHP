@@ -6,12 +6,16 @@
     https://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
     
     <entity name="App\Entity\BookReader" table="Book_Reader" repository-class="App\Repository\BookReaderRepository">
+                
+        <field name="user_id"  type="UuidType" length="255" column="user_id" nullable="false"/>
         
-        <one-to-one field="book" target-entity="Book" inversed-by="Book_Reader">
+        <field name="book_id"  type="UuidType" length="255" column="book_id" nullable="false"/>
+
+        <one-to-one field="book" target-entity="Book">
             <join-column name="book_id" referenced-column-name="id" />
         </one-to-one>
 
-        <one-to-one field="user" target-entity="User" inversed-by="Book_Reader">
+        <one-to-one field="user" target-entity="User">
             <join-column name="user_id" referenced-column-name="id" />
         </one-to-one>
 

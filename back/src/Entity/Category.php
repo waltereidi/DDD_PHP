@@ -18,7 +18,7 @@ class Category extends Entity implements Subscriber
     private string $name = "";
     private ?string $description = null;
     private bool $active = false;
-
+    private BookCategory $bookCategory;
     public function getName() : string
     {
         return $this->name;

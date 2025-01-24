@@ -16,6 +16,8 @@ class Book extends Entity implements Subscriber
     private ?string $description = null;
     private string $isbn;
     private ?string $isbn13 = null;
+    private BookCategory $bookCategory;
+
     /**
      * Refers to categories assigned to this book
      * @var BookCategory
@@ -33,16 +35,18 @@ class Book extends Entity implements Subscriber
     private ?Collection  $reading_now = null; 
     public function getCategories(): array
     {
-        $c = $this->categories->count();
-        return $this->categories->getValues();
+        $categories = $this->categories->getValues();
+        return $categories;
     }
-    public function getBookReader():array
+    public function getBookReader(): array
     {
-        return $this->book_reader->getValues();
+        $bookReader = $this->book_reader->getValues();
+        return $bookReader;
     }
     public function getReadingNow() :array
     {
-        return $this->reading_now->getValues();
+        $readingNow = $this->reading_now->getValues();
+        return $readingNow;
     }
     public function getTitle(): ?string
     {
