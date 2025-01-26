@@ -15,6 +15,7 @@ class UserAddedBook implements DomainEvent
      * @var array<CreateCategory>
      */
     private array $createCategories;
+        
     private array $createBookCategory;
 
     public function __construct(

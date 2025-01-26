@@ -13,8 +13,9 @@ class CreateCategory implements DomainEvent
     private string|null $description ; 
     private bool $active ; 
     private \DateTimeImmutable $occurredOn;
-    public function __construct(string $name , string|null $description , bool|null $active)
+    public function __construct(string $id ,string $name , string|null $description , bool|null $active)
     {
+        $this->id = Uuid::fromString($id);
         $this->occurredOn = new \DateTimeImmutable();
         $this->name = $name ?? throw new \InvalidArgumentException('Name is required');
         $this->description = $description;  
@@ -22,7 +23,7 @@ class CreateCategory implements DomainEvent
     }
     public function getId(): LazyUuidFromString
     {
-        return $this->id ?? Uuid::uuid4();;
+        return $this->id;
     }
 
     public function getName() : string

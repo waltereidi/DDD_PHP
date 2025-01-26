@@ -11,6 +11,7 @@ class CreateUserBookReadingNow implements DomainEvent
     private int $book_id;
     private int $user_id;
     private bool $active;
+    private LazyUuidFromString $id;
 	public function __construct(int $book_id , int $user_id , ?bool $active)
 	{
 		$this->occurredOn = new \DateTimeImmutable();
@@ -20,7 +21,7 @@ class CreateUserBookReadingNow implements DomainEvent
 	}
     public function getId(): LazyUuidFromString
     {
-        return $this->id ?? Uuid::uuid4();
+        return $this->id;
     }
 	public function occurredOn(): \DateTimeImmutable
 	{

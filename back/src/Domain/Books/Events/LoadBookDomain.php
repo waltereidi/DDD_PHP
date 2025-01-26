@@ -12,6 +12,7 @@ class LoadBookDomain implements DomainEvent
 	{
 		return $this->occurredOn;
 	}
+
     public function __construct(Book $book){
         $this->occurredOn = new \DateTimeImmutable();
         $this->book = $book;

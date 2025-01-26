@@ -50,15 +50,15 @@ class BookService implements ApplicationServiceInterface
                 ->bookRepository
                 ->findOneBy(['id'=> $request->book->id]) 
                 ?? throw new ItemNotFoundException("could not find". $request->book->id);            
+    
+            $this->domain->apply(new LoadBookDomain($book));
         }
 
-        $this->domain->apply(new LoadBookDomain($book));
+        
 
         $this->domain->saveEntities();
 
-        return $this->repository
-            ->bookRepository
-            ->findOneBy(['id' => $this->domain->getBook()->id]);      
+        return throw new \Exception();
     }
 
     protected function getLeftBarCategories() : array

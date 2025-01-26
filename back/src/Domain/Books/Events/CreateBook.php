@@ -17,11 +17,13 @@ class CreateBook implements DomainEvent
 
 
     public function __construct(
+        string $id,
         string $title 
         ,string|null $description 
         ,string $isbn 
         ,string|null $isnb13 )
     {
+        $this->id = Uuid::fromString($id);
         $this->occurredOn = new \DateTimeImmutable();
         $this->title = $title ?? throw new \InvalidArgumentException('title is required');
         $this->description = $description; 
@@ -30,7 +32,7 @@ class CreateBook implements DomainEvent
     }
     public function getId(): LazyUuidFromString
     {
-        return $this->id ?? Uuid::uuid4();;
+        return $this->id;
     }
     public function title(): string
     {

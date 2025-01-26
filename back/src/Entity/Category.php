@@ -43,7 +43,7 @@ class Category extends Entity implements Subscriber
     }
     private function ensureValidState():void 
     {
-
+        
     }
 
     protected function when(DomainEvent $e) :void

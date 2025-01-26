@@ -19,7 +19,7 @@ class CreateBookCategory implements DomainEvent
 	}
     public function getId(): LazyUuidFromString
     {
-        return $this->id ?? Uuid::uuid4();;
+        return $this->id ;
     }
 	public function occurredOn(): \DateTimeImmutable
 	{
