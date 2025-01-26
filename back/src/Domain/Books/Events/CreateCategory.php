@@ -3,9 +3,12 @@
 namespace App\Domain\Books\Events;
 
 use App\Domain\DomainEvent;
+use Ramsey\Uuid\Lazy\LazyUuidFromString;
+use Ramsey\Uuid\Nonstandard\Uuid;
 
 class CreateCategory implements DomainEvent
 {
+    private LazyUuidFromString $id ;
     private string $name ; 
     private string|null $description ; 
     private bool $active ; 
@@ -16,6 +19,10 @@ class CreateCategory implements DomainEvent
         $this->name = $name ?? throw new \InvalidArgumentException('Name is required');
         $this->description = $description;  
         $this->active = $active ?? false;
+    }
+    public function getId(): LazyUuidFromString
+    {
+        return $this->id ?? Uuid::uuid4();;
     }
 
     public function getName() : string

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Domain\Books\Events\CreateBook;
 use App\Domain\DomainEvent;
 use App\Domain\DomainEventSubscriber;
 use App\Domain\Subscriber;
@@ -22,7 +23,7 @@ class Book extends Entity implements Subscriber
      * Refers to categories assigned to this book
      * @var BookCategory
      */
-    private ?Collection  $categories = null; 
+    private ?Collection  $book_categories = null; 
     /**
      * Refers to users who read this book
      * @var BookReader
@@ -33,9 +34,9 @@ class Book extends Entity implements Subscriber
      * @var UserBookReadingNow
      */
     private ?Collection  $reading_now = null; 
-    public function getCategories(): array
+    public function getBookCategories(): array
     {
-        $categories = $this->categories->getValues();
+        $categories = $this->book_categories->getValues();
         return $categories;
     }
     public function getBookReader(): array
@@ -67,15 +68,27 @@ class Book extends Entity implements Subscriber
     {
         return $this->isbn13;
     }
-    public function handle(DomainEvent $aDomainEvent) :void
+
+    public function handle(DomainEvent $e) :void
     {
+        array_push($this->events , $e);
+        $this->when($e);
+        $this->ensureValidState();
+    }
+    private function ensureValidState():void 
+    {
+
     }
 
     protected function when(DomainEvent $e) :void
     {
+        
     }
-    public function isSubscribedTo(DomainEvent $aDomainEvent) : bool
+    public function isSubscribedTo(DomainEvent $e) : bool
     {
-        return true;
+        if($e::class == CreateBook::class){
+            return (object)$e->id == $this->id;
+        }else
+            return false;
     }
 }

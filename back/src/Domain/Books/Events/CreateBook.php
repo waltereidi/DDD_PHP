@@ -3,9 +3,12 @@
 namespace App\Domain\Books\Events;
 
 use App\Domain\DomainEvent;
+use Ramsey\Uuid\Lazy\LazyUuidFromString;
+use Ramsey\Uuid\Uuid;
 
 class CreateBook implements DomainEvent
 {
+    private LazyUuidFromString $id ;
     private string $title ; 
     private string|null $description ; 
     private string $isbn;
@@ -24,6 +27,10 @@ class CreateBook implements DomainEvent
         $this->description = $description; 
         $this->isbn = $isbn ?? throw new \InvalidArgumentException('isbn is required');
         $this->isbn13 = $isnb13;
+    }
+    public function getId(): LazyUuidFromString
+    {
+        return $this->id ?? Uuid::uuid4();;
     }
     public function title(): string
     {

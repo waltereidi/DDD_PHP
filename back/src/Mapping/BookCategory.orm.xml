@@ -15,7 +15,7 @@
             <join-column name="book_id" referenced-column-name="id" nullable="false"/>
         </many-to-one>
 
-        <many-to-one field="category" target-entity="Category"  inversed-by="BookCategory">
+        <many-to-one field="category" target-entity="Category"  inversed-by="BookCategory"  >
             <join-column name="category_id" referenced-column-name="id" nullable="false"/>
         </many-to-one> 
 

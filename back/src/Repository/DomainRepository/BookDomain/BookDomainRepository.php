@@ -3,9 +3,11 @@
 namespace App\Repository\DomainRepository\BookDomain;
 
 use App\Contracts\UI\Pagination;
+use App\Entity\Book;
 use App\Repository as Repository;
 use Doctrine\Persistence\ConnectionRegistry;
 use Doctrine\Persistence\ManagerRegistry;
+use Ramsey\Uuid\Lazy\LazyUuidFromString;
 
 class BookDomainRepository 
 {
@@ -27,6 +29,11 @@ class BookDomainRepository
         $this->bookReaderRepository = new Repository\BookReaderRepository($registry); 
 
         $this->manager = $registry;
+    }
+    public function getBookByIdAndLoadProxies(LazyUuidFromString $uuid ):Book
+    {
+        $book = $this->bookRepository->find($uuid);
+        return $book;
     }
 
     public function getMainPageBooks(Pagination $pagination): array

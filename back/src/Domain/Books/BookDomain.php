@@ -5,13 +5,8 @@ use App\Domain\Books\Events\LoadBookDomain;
 use App\Domain\Books\Events\UserAddedBook;
 use App\Domain\DomainEvent;
 use App\Domain\DomainEventPublisher;
-use App\Domain\DomainEventSubscriber;
 use App\Entity as Entity;
-use App\Entity\Book;
-use App\Entity\BookCategory;
-use App\Entity\BookReader;
-use App\Entity\Category;
-use App\Entity\UserBookReadingNow;
+
 use App\Repository\DomainRepository\BookDomain\BookDomainRepository;
 
 class BookDomain extends AggregateRoot 
@@ -30,8 +25,6 @@ class BookDomain extends AggregateRoot
         parent::__construct($bookId);
         $this->repository = $repository;
         $this->subscriber = DomainEventPublisher::instance();
-
-
     }
     public function getBook():Entity\Book 
     {
@@ -46,12 +39,14 @@ class BookDomain extends AggregateRoot
         
         $this->subscriber->subscribe($e->book);
         
-        $categories =$e->book->getCategories();
-        array_walk($categories ,fn($item)
-            =>$this->subscriber->subscribe($item) );
+        $bookcategories =$e->book->getBookCategories();
 
-        $vc = $categories[0]->getCategory();
+        array_walk($bookcategories ,fn($item)
+            =>$this->subscriber->subscribe($item) );
         
+        array_walk($bookcategories ,fn($item)
+            =>$this->subscriber->subscribe($item->getCategory()) );
+
         $readingNow = $e->book->getReadingNow();
         array_walk($readingNow , fn($item , $key) 
             => $this->subscriber->subscribe($item));         
@@ -59,7 +54,9 @@ class BookDomain extends AggregateRoot
         $bookReader = $e->book->getBookReader();
         array_walk($bookReader , fn($item , $key) 
             => $this->subscriber->subscribe($item));
+        
     }
+
     public function saveEntities()
     {
         $this->repository->manager->getConnection()
@@ -78,7 +75,8 @@ class BookDomain extends AggregateRoot
  
     protected function applyUserAddedBook(UserAddedBook $e) :void
     {
-
+        
+                        
 
     }
     

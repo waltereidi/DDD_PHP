@@ -33,16 +33,28 @@ class BookReader extends Entity implements Subscriber
         return $this->user;
     }
 
-    public function handle(DomainEvent $aDomainEvent) :void
+
+    public function handle(DomainEvent $e) :void
     {
+        array_push($this->events , $e);
+        $this->when($e);
+        $this->ensureValidState();
+    }
+    private function ensureValidState():void 
+    {
+
     }
 
     protected function when(DomainEvent $e) :void
     {
+        
     }
-    public function isSubscribedTo(DomainEvent $aDomainEvent) : bool
+    public function isSubscribedTo(DomainEvent $e) : bool
     {
-        return true;
+        if($e::class == BookCategory::class){
+            return (object)$e->id == $this->id;
+        }else
+            return false;
     }
 
 }

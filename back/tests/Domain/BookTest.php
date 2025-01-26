@@ -6,6 +6,7 @@ use App\Domain\Books\Events\LoadBookDomain;
 use App\Repository\DomainRepository\BookDomain\BookDomainRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use PHPUnit\Framework\TestCase;
+use Ramsey\Uuid\Uuid;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 final class BookTest extends KernelTestCase
@@ -28,9 +29,11 @@ final class BookTest extends KernelTestCase
 
     public function testLoadDomainSubscribeEntities()
     {
-        $books = $this->repos->bookRepository->findAll();
-        $dbooks = $this->repos->bookCategoryRepository->findAll();
-        $event = new LoadBookDomain(array_pop($books));
+        $books = $this->repos->bookRepository->findAll();        
+
+        $getBook = $this->repos->getBookByIdAndLoadProxies(Uuid::fromString('3fc7fd5c-406f-4bde-be8d-085ef3a8f2dc'));
+
+        $event = new LoadBookDomain($books[0]);
         $this->domain->apply($event);
 
     }

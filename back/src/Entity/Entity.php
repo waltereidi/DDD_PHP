@@ -8,6 +8,8 @@ abstract class Entity
     public ?LazyUuidFromString $id = null;
     public ?\DateTimeInterface $created_at = null;
     public ?\DateTimeInterface $updated_at = null;
+    public ?array $events = null;
+
     public function getId() : LazyUuidFromString 
     {
         return $this->id;

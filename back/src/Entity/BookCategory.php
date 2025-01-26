@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Domain\Books\Events\CreateBookCategory;
 use App\Domain\DomainEvent;
 use App\Domain\DomainEventSubscriber;
 use App\Domain\Subscriber;
@@ -17,7 +18,7 @@ class BookCategory extends Entity implements Subscriber
     private LazyUuidFromString $book_id; 
     private LazyUuidFromString $category_id;
     private Book $book;
-    private Collection $category;
+    private Category $category;
     
     public function getBook(): ?Book
     {
@@ -25,21 +26,31 @@ class BookCategory extends Entity implements Subscriber
     }
 
     public function getCategory(): ?Category
-    {
-        $r = $this->category->getValues();
-        return $r[0];
+    {        
+        return $this->category;
     }
 
-    public function handle(DomainEvent $aDomainEvent) :void
+    public function handle(DomainEvent $e) :void
     {
+        array_push($this->events , $e);
+        $this->when($e);
+        $this->ensureValidState();
+    }
+    private function ensureValidState():void 
+    {
+
     }
 
     protected function when(DomainEvent $e) :void
     {
+        
     }
-    public function isSubscribedTo(DomainEvent $aDomainEvent) : bool
+    public function isSubscribedTo(DomainEvent $e) : bool
     {
-        return true;
+        if($e::class == CreateBookCategory::class){
+            return (object)$e->id == $this->id;
+        }else
+            return false;
     }
 
 }

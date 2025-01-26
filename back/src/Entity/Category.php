@@ -34,19 +34,21 @@ class Category extends Entity implements Subscriber
         return $this->active;
     }
 
-    public function handle(DomainEvent $aDomainEvent) :void
+
+    public function handle(DomainEvent $e) :void
     {
-        $this->setEntityTime();
-        $this->when($aDomainEvent);
-        $this->setNewGuid();
+        array_push($this->events , $e);
+        $this->when($e);
+        $this->ensureValidState();
+    }
+    private function ensureValidState():void 
+    {
+
     }
 
     protected function when(DomainEvent $e) :void
     {
-        switch($e::class)
-        {
-            case CreateCategory::class : $this->handleCreateNewCategory($e);break;
-        };
+        
     }
     private function handleCreateNewCategory(CreateCategory $e) :void
     {
@@ -61,10 +63,11 @@ class Category extends Entity implements Subscriber
      * @param \App\Domain\DomainEvent $aDomainEvent
      * @return bool
      */
-    public function isSubscribedTo(DomainEvent $aDomainEvent) : bool
+    public function isSubscribedTo(DomainEvent $e) : bool
     {
-        $allowedEvents = array(CreateCategory::class);
-
-        return true;
+        if($e::class == CreateCategory::class){
+            return (object)$e->id == $this->id;
+        }else
+            return false;
     }
 }

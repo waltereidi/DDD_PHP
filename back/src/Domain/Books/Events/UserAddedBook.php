@@ -14,7 +14,9 @@ class UserAddedBook implements DomainEvent
      * Summary of categories
      * @var array<CreateCategory>
      */
-    private array $categories;
+    private array $createCategories;
+    private array $createBookCategory;
+
     public function __construct(
         CreateBook $createBook,
         CreateBookReader $createBookReader,
@@ -35,7 +37,7 @@ class UserAddedBook implements DomainEvent
     }    
     public function ensureClassIsValid(array $a , string $className ) : bool
     {
-        return array_filter($this->categories , fn($x)=>$x::class != $className ) 
+        return array_filter($this->createCategories , fn($x)=>$x::class != $className ) 
             ? true 
             : false;
     }
@@ -46,7 +48,7 @@ class UserAddedBook implements DomainEvent
             ? $createBookCategory 
             : throw new \Exception("");
     }    
-    public function createBook() : CreateBook
+    public function getCreateBook() : CreateBook
     {
         return $this->createBook;
     }
@@ -54,9 +56,9 @@ class UserAddedBook implements DomainEvent
     {
         return $this->createBookReader;
     }   
-    public function getCategories() : array
+    public function getCreateCategories() : array
     {
-        return $this->categories;
+        return $this->createCategories;
     }
     public function occurredOn(): \DateTimeImmutable
     {

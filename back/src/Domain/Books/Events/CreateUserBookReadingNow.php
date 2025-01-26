@@ -2,6 +2,8 @@
 
 namespace App\Domain\Books\Events;
 use App\Domain\DomainEvent;
+use Ramsey\Uuid\Lazy\LazyUuidFromString;
+use Ramsey\Uuid\Uuid;
 
 class CreateUserBookReadingNow implements DomainEvent
 {
@@ -16,7 +18,10 @@ class CreateUserBookReadingNow implements DomainEvent
         $this->user_id = $user_id;
         $this->active = $active ?? false;
 	}
-    
+    public function getId(): LazyUuidFromString
+    {
+        return $this->id ?? Uuid::uuid4();
+    }
 	public function occurredOn(): \DateTimeImmutable
 	{
 		return $this->occurredOn;

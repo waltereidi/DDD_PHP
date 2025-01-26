@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Domain\Books\Events\CreateUserBookReadingNow;
 use App\Domain\DomainEvent;
 use App\Domain\DomainEventSubscriber;
 use App\Domain\Subscriber;
@@ -38,8 +39,11 @@ class UserBookReadingNow extends Entity implements Subscriber
     {
     }
         
-    public function isSubscribedTo(DomainEvent $aDomainEvent) : bool
+    public function isSubscribedTo(DomainEvent $e) : bool
     {
-        return true;
+        if($e::class == CreateUserBookReadingNow::class){
+            return (object)$e->id == $this->id;
+        }else
+            return false;
     }
 }
