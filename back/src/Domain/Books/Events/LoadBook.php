@@ -4,7 +4,7 @@ namespace App\Domain\Books\Events;
 use App\Domain\DomainEvent;
 use App\Entity\Book;
 
-class LoadBookDomain implements DomainEvent
+class LoadBook implements DomainEvent
 {
     public Book $book;
     private \DateTimeImmutable $occurredOn;

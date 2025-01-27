@@ -1,10 +1,11 @@
 <?php
 namespace App\Domain\Books;
 use App\Domain\AggregateRoot;
-use App\Domain\Books\Events\LoadBookDomain;
+use App\Domain\Books\Events\LoadBook;
 use App\Domain\Books\Events\UserAddedBook;
 use App\Domain\DomainEvent;
 use App\Domain\DomainEventPublisher;
+use App\Domain\Books\Events\LoadCategories;
 use App\Entity as Entity;
 
 use App\Repository\DomainRepository\BookDomain\BookDomainRepository;
@@ -28,7 +29,7 @@ class BookDomain extends AggregateRoot
         $this->recordApplyAndPublishThat($e);
     }
 
-    protected function applyLoadBookDomain(LoadBookDomain $e)
+    protected function applyLoadBookDomain(LoadBook $e)
     {
         
         $this->subscriber->subscribe($e->book);
@@ -52,7 +53,10 @@ class BookDomain extends AggregateRoot
             => array_push($item->id   ,$this->subscriber->subscribe($item) ));
         
     }
-
+    protected function applyLoadCategories( LoadCategories $e):void 
+    {
+        
+    }
     public function saveEntities()
     {
         $this->repository->manager->getConnection()

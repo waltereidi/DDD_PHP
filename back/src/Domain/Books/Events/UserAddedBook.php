@@ -42,7 +42,7 @@ class UserAddedBook implements DomainEvent
             ? true 
             : false;
     }
-
+    
     public function setCreateBookCategory(array $createBookCategory ) : array
     {
         return $this->ensureClassIsValid($createBookCategory , CreateCategory::class) 

@@ -35,6 +35,12 @@ class BookDomainRepository
         $book = $this->bookRepository->find($uuid);
         return $book;
     }
+    public function getCategoriesById(array $categories) : array 
+    {
+        $ids = array_map(fn($c)=> $c->id, $categories);
+        return $this->categoryRepository
+            ->findBy(array('id' => $ids));
+    }
 
     public function getMainPageBooks(Pagination $pagination): array
     {

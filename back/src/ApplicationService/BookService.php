@@ -5,8 +5,10 @@ use ApiPlatform\Metadata\Exception\ItemNotFoundException;
 use App\Contracts\UI\Pagination;
 use App\Domain\Books\BookDomain;
 use App\Domain\Books\BookId;
+use App\Domain\Books\Events\LoadBook;
 use App\Domain\Books\Events\LoadBookDomain;
 use App\Entity\Book;
+use App\Domain\Books\Events\LoadCategories;
 use Symfony\Component\HttpKernel\KernelInterface;
 use App\ApplicationService\ApplicationServiceInterface;
 use App\Contracts\Home\V1 as V1;
@@ -42,6 +44,7 @@ class BookService implements ApplicationServiceInterface
             default: throw new \InvalidArgumentException('Invalid command '.$command);
         }
     }
+    
     protected function createBook(V1\CreateBook $request):Book
     {
         if($request->book->id != null ){
@@ -51,10 +54,18 @@ class BookService implements ApplicationServiceInterface
                 ->findOneBy(['id'=> $request->book->id]) 
                 ?? throw new ItemNotFoundException("could not find". $request->book->id);            
     
-            $this->domain->apply(new LoadBookDomain($book));
+            $this->domain->apply(new LoadBook($book));
         }
-
         
+        $loadCategories = new LoadCategories($request->categories);
+        
+        $categoriesToReplace = $this->repository
+            ->getCategoriesById($loadCategories->getCategoriesWithId());
+
+        $loadCategories->replaceCategories( $categoriesToReplace );
+        $this->domain->apply($loadCategories);
+        
+
 
         $this->domain->saveEntities();
 
