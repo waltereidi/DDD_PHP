@@ -15,25 +15,10 @@ class Category extends Entity implements Subscriber
         parent::__construct();
     }
 
-    private string $name = "";
-    private ?string $description = null;
-    private bool $active = false;
-    private BookCategory $bookCategory;
-    public function getName() : string
-    {
-        return $this->name;
-    }
-   
-    public function getDescription() : ?string
-    {
-        return $this->description;
-    }
-
-    public function getActive() : bool
-    {
-        return $this->active;
-    }
-
+    public string $name = "";
+    public ?string $description = null;
+    public bool $active = false;
+    public BookCategory $bookCategory;
 
     public function handle(DomainEvent $e) :void
     {

@@ -13,24 +13,12 @@ use Ramsey\Uuid\Lazy\LazyUuidFromString;
 #[ORM\Entity(repositoryClass: UserBookReadingNowRepository::class)]
 class UserBookReadingNow extends Entity implements Subscriber
 {
-    private User $user;
-    private Book $book;
-    private bool $active = true;
-    private LazyUuidFromString $book_id; 
-    private LazyUuidFromString $user_id;
-    public function getUser(): User
-    {
-        return $this->user;
-    }
-    public function getBookId(): Book
-    {
-        return $this->book;
-    }
-    public function isActive(): ?bool
-    {
-        return $this->active;
-    }
-
+    public User $user;
+    public Book $book;
+    public bool $active = true;
+    public LazyUuidFromString $book_id; 
+    public LazyUuidFromString $user_id;
+  
     public function handle(DomainEvent $aDomainEvent) :void
     {
     }

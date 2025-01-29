@@ -13,25 +13,11 @@ use Ramsey\Uuid\Uuid;
 #[ORM\Entity(repositoryClass: BookReaderRepository::class)]
 class BookReader extends Entity implements Subscriber
 {
-    private Book $book;
-    private User $user;
-    private LazyUuidFromString $book_id; 
-    private LazyUuidFromString $user_id;
-    private ?string $commentary = null;
-
-    public function getBookId(): Book
-    {
-        return $this->book;
-    }
-
-    public function getCommentary(): ?string
-    {
-        return $this->commentary;
-    }
-    public function getUser(): User
-    {
-        return $this->user;
-    }
+    public Book $book;
+    public User $user;
+    public LazyUuidFromString $book_id; 
+    public LazyUuidFromString $user_id;
+    public ?string $commentary = null;
 
 
     public function handle(DomainEvent $e) :void

@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 class User extends Entity
 {
 
-    private string $email;
+    public string $email;
 
 
     public function getEmail(string $email): string

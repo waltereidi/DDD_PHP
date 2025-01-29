@@ -13,61 +13,28 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: BookRepository::class)]
 class Book extends Entity implements Subscriber
 {
-    private string $title;
-    private ?string $description = null;
-    private string $isbn;
-    private ?string $isbn13 = null;
-    private BookCategory $bookCategory;
+    public string $title;
+    public ?string $description = null;
+    public string $isbn;
+    public ?string $isbn13 = null;
+    public BookCategory $bookCategory;
 
     /**
      * Refers to categories assigned to this book
      * @var BookCategory
      */
-    private ?Collection  $book_categories = null; 
+    public ?Collection  $book_categories = null; 
     /**
      * Refers to users who read this book
      * @var BookReader
      */
-    private ?Collection  $book_reader = null; 
+    public ?Collection  $book_reader = null; 
     /**
      * Refers to users who are reading this book now
      * @var UserBookReadingNow
      */
-    private ?Collection  $reading_now = null; 
-    public function getBookCategories(): array
-    {
-        $categories = $this->book_categories->getValues();
-        return $categories;
-    }
-    public function getBookReader(): array
-    {
-        $bookReader = $this->book_reader->getValues();
-        return $bookReader;
-    }
-    public function getReadingNow() :array
-    {
-        $readingNow = $this->reading_now->getValues();
-        return $readingNow;
-    }
-    public function getTitle(): ?string
-    {
-        return $this->title;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-        public function getIsbn(): ?string
-    {
-        return $this->isbn;
-    }
-
-    public function getIsbn13(): ?string
-    {
-        return $this->isbn13;
-    }
+    public ?Collection  $reading_now = null; 
+  
 
     public function handle(DomainEvent $e) :void
     {

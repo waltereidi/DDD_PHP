@@ -8,13 +8,12 @@ use App\Entity\UserBookReadingNow;
 
 class CreateBook
 {
-    /**
-     * Refers to users who read this book
-     * @var \App\Entity\Category
-     */
-    public array $categories;
-    public Book $book;
-    private BookReader $book_reader ; 
-    private  UserBookReadingNow $reading_now ;
+
+    public function __construct(
+        public array $categories,
+        public UserBookReadingNow $userBookReadingNow
+    ){
+
+    }
 
 }

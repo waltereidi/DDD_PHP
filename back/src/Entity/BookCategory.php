@@ -15,21 +15,11 @@ use Ramsey\Uuid\Uuid;
 #[ORM\Entity(repositoryClass: BookCategoryRepository::class)]
 class BookCategory extends Entity implements Subscriber
 {
-    private LazyUuidFromString $book_id; 
-    private LazyUuidFromString $category_id;
-    private Book $book;
-    private Category $category;
+    public LazyUuidFromString $book_id; 
+    public LazyUuidFromString $category_id;
+    public Book $book;
+    public Category $category;
     
-    public function getBook(): ?Book
-    {
-        return $this->book;
-    }
-
-    public function getCategory(): ?Category
-    {        
-        return $this->category;
-    }
-
     public function handle(DomainEvent $e) :void
     {
         array_push($this->events , $e);

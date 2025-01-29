@@ -1,3 +1,4 @@
+php bin/console cache:pool:clear --all
 symfony server:start --port=55555  --allow-cors  --listen-ip=0.0.0.0
 sudo chmod 777 /var/run/docker.sock
 

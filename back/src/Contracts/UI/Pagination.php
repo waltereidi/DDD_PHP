@@ -1,20 +1,16 @@
 <?php 
 
 namespace App\Contracts\UI;
-
 class Pagination
 {
-    /**
-     * Refers to amount of rows returned
-     * @var int
-     */
-    public int $maxResults; 
-    /**
-     * Refers to page location starting from 1.
-     * @var int
-     */
-    public int $page;
-
+    
+    public function __construct( 
+        public int $maxResults,
+        public int $page 
+        )
+    {
+        
+    }
     private function ensureIsValid(int $page)
     {
         if ($page < 1) 
