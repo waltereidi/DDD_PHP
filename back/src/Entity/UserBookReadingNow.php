@@ -35,7 +35,7 @@ class UserBookReadingNow extends Entity implements Subscriber
     {
     }
 
-    protected function when(DomainEvent $e) :void
+    public function when(DomainEvent $e) :void
     {
     }
         

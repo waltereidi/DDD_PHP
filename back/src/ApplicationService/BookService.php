@@ -9,6 +9,7 @@ use App\Domain\Books\Events\LoadBook;
 use App\Domain\Books\Events\LoadBookDomain;
 use App\Entity\Book;
 use App\Domain\Books\Events\LoadCategories;
+use Ramsey\Uuid\Lazy\LazyUuidFromString;
 use Symfony\Component\HttpKernel\KernelInterface;
 use App\ApplicationService\ApplicationServiceInterface;
 use App\Contracts\Home\V1 as V1;
@@ -27,10 +28,10 @@ class BookService implements ApplicationServiceInterface
             ->getContainer()
             ->get('doctrine');
         
+        $this->repository = new BookDomainRepository($managerRegistry);
 
         $this->domain = new BookDomain(BookId::create() , $this->repository);
         
-        $this->repository = new BookDomainRepository($managerRegistry);
     }
 
     //TODO add objects contracts delegated from controller
@@ -57,13 +58,18 @@ class BookService implements ApplicationServiceInterface
             $this->domain->apply(new LoadBook($book));
         }
         
-        $loadCategories = new LoadCategories($request->categories);
+        if( count($request->categories) > 0 )
+        {
+            $loadCategories = new LoadCategories($request->categories);
         
-        $categoriesToReplace = $this->repository
-            ->getCategoriesById($loadCategories->getCategoriesWithId());
+            $categoriesToReplace = $this->repository
+                ->getCategoriesById($loadCategories->getCategoriesWithId());
 
-        $loadCategories->replaceCategories( $categoriesToReplace );
-        $this->domain->apply($loadCategories);
+            $loadCategories->replaceCategories( $categoriesToReplace );
+            $this->domain->apply($loadCategories);
+        }
+        
+
         
 
 

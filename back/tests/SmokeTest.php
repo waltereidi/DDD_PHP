@@ -1,5 +1,6 @@
 <?php declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
+use Ramsey\Uuid\Lazy\LazyUuidFromString;
 
 final class SmokeTest extends TestCase
 {
@@ -8,5 +9,5 @@ final class SmokeTest extends TestCase
     {
         $this->assertSame(true , true);
     }
-    
+
 }

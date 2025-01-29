@@ -75,12 +75,12 @@ class Book extends Entity implements Subscriber
         $this->when($e);
         $this->ensureValidState();
     }
-    private function ensureValidState():void 
+    public function ensureValidState():void 
     {
 
     }
 
-    protected function when(DomainEvent $e) :void
+    public function when(DomainEvent $e) :void
     {
         
     }

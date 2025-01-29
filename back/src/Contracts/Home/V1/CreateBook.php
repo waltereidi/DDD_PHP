@@ -15,7 +15,6 @@ class CreateBook
     public array $categories;
     public Book $book;
     private BookReader $book_reader ; 
-    
     private  UserBookReadingNow $reading_now ;
 
 }

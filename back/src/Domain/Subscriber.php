@@ -19,9 +19,6 @@ interface Subscriber
      * @return bool
      */
     public function isSubscribedTo(DomainEvent $aDomainEvent) : bool;
-    private function ensureValidState():void;
-    protected function when(DomainEvent $e) :void;
 
-    protected array $events {get;set;}
 
 }

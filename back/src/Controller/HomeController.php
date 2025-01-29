@@ -23,10 +23,11 @@ class HomeController extends BaseController
         return $this->handle(null , 'getLeftBarCategories');
     }
 
-    #[Route('/getMainPageBooks', name: 'getMainPageBooks' , methods: ['GET'])]
+    #[Route('/getMainPageBooks', name: 'getMainPageBooks' , methods: ['POST'])]
     public function getMainPageBooks(Pagination $pagination): Response
     {
-        return $this->handle(null , 'getMainPageBooks');
+        //return $this->handle(null , 'getMainPageBooks');
+        return new Response($pagination->maxResults);
     }
     
     #[Route('/createBook', name: 'createBook' , methods: ['POST'])]

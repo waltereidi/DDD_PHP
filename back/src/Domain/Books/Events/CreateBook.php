@@ -8,12 +8,12 @@ use Ramsey\Uuid\Uuid;
 
 class CreateBook implements DomainEvent
 {
-    private LazyUuidFromString $id ;
-    private string $title ; 
-    private string|null $description ; 
-    private string $isbn;
-    private string $isbn13;
-    private \DateTimeImmutable $occurredOn;
+    public string $id ;
+    public string $title ; 
+    public string|null $description ; 
+    public string $isbn;
+    public string $isbn13;
+    public \DateTimeImmutable $occurredOn;
 
 
     public function __construct(
@@ -23,7 +23,7 @@ class CreateBook implements DomainEvent
         ,string $isbn 
         ,string|null $isnb13 )
     {
-        $this->id = Uuid::fromString($id);
+        $this->id = $id;
         $this->occurredOn = new \DateTimeImmutable();
         $this->title = $title ?? throw new \InvalidArgumentException('title is required');
         $this->description = $description; 
@@ -32,7 +32,7 @@ class CreateBook implements DomainEvent
     }
     public function getId(): LazyUuidFromString
     {
-        return $this->id;
+        return Uuid::fromString($this->id);
     }
     public function title(): string
     {

@@ -8,20 +8,13 @@ class Pagination
      * Refers to amount of rows returned
      * @var int
      */
-    private int $maxResults; 
+    public int $maxResults; 
     /**
      * Refers to page location starting from 1.
      * @var int
      */
-    private int $page;
+    public int $page;
 
-    public function __construct(int $page, int $maxResults)
-    {
-        $this->ensureIsValid($page);
-
-        $this->maxResults = $maxResults;
-        $this->page = $page - 1;
-    }
     private function ensureIsValid(int $page)
     {
         if ($page < 1) 
