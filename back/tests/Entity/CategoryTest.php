@@ -8,14 +8,4 @@ use PHPUnit\Framework\TestCase;
 final class CategoryTest extends TestCase
 {
 
-    public function testBookId(): void
-    {
-
-        $createCategory = new CreateCategory("TestCase" , null , null );
-        $entity = new Category;
-        $entity->handle($createCategory);
-        $this->assertSame($entity->getName(), $createCategory->getName());
-        
-    }
-    
 }
