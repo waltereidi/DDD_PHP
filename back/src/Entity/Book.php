@@ -17,8 +17,6 @@ class Book extends Entity implements Subscriber
     public ?string $description = null;
     public string $isbn;
     public ?string $isbn13 = null;
-    public BookCategory $bookCategory;
-
     /**
      * Refers to categories assigned to this book
      * @var BookCategory

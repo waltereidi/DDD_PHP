@@ -9,14 +9,12 @@ class CreateBookReader implements DomainEvent
 {
     private LazyUuidFromString $id ;
 	private \DateTimeImmutable $occurredOn;
-    private int $book_id;
-    private int $user_id;
+    private LazyUuidFromString $user_id;
     private ?string $commentary;
-	public function __construct(string $id ,int $book_id , int $user_id , ?string $commentary)
+	public function __construct(LazyUuidFromString $user_id , ?string $commentary )
 	{
-        $this->id = Uuid::fromString($id);
+        $this->id = Uuid::uuid4();
 		$this->occurredOn = new \DateTimeImmutable();
-        $this->book_id = $book_id;
         $this->user_id = $user_id;
         $this->commentary = $commentary;
 	}
@@ -28,11 +26,8 @@ class CreateBookReader implements DomainEvent
 	{
 		return $this->occurredOn;
 	}
-    public function book_id(): int
-    {
-        return $this->book_id;
-    }
-    public function user_id(): int
+
+    public function user_id(): LazyUuidFromString
     {
         return $this->user_id;
     }

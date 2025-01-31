@@ -17,7 +17,7 @@ class CreateBook implements DomainEvent
 
 
     public function __construct(
-        string $id,
+        ?string $id,
         string $title 
         ,string|null $description 
         ,string $isbn 
@@ -32,7 +32,9 @@ class CreateBook implements DomainEvent
     }
     public function getId(): LazyUuidFromString
     {
-        return Uuid::fromString($this->id);
+        return $this->id == null 
+            ? Uuid::fromString($this->id)
+            : Uuid::uuid4();
     }
     public function title(): string
     {

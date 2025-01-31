@@ -5,19 +5,23 @@ use ApiPlatform\Metadata\Exception\ItemNotFoundException;
 use App\Contracts\UI\Pagination;
 use App\Domain\Books\BookDomain;
 use App\Domain\Books\BookId;
+use App\Domain\Books\Events\CreateBook;
 use App\Domain\Books\Events\LoadBook;
+use App\Domain\Books\Events\UserAddedBook;
 use App\Entity\Book;
 use App\Domain\Books\Events\LoadCategories;
+use App\Session\Session;
 use Symfony\Component\HttpKernel\KernelInterface;
 use App\ApplicationService\ApplicationServiceInterface;
 use App\Controller\Contracts\Home\V1 as V1;
 use App\Repository\DomainRepository\BookDomain\BookDomainRepository;
-
+use App\Domain\Books\Events\CreateBookReader;
 class BookService implements ApplicationServiceInterface
 {
     protected readonly KernelInterface $kernel;
     protected readonly BookDomainRepository $repository;
     protected BookDomain $domain;
+    protected Session $session; 
     public function __construct(KernelInterface $kernel)
     {
         $this->kernel = $kernel;
@@ -30,6 +34,7 @@ class BookService implements ApplicationServiceInterface
 
         $this->domain = new BookDomain(BookId::create() , $this->repository);
         
+        $this->session = new Session();
     }
 
     //TODO add objects contracts delegated from controller
@@ -66,13 +71,33 @@ class BookService implements ApplicationServiceInterface
                 ->getCategoriesById($loadCategories->getCategoriesWithId());
 
             $loadCategories->replaceCategories( $categoriesToReplace );
+            
             $this->domain->apply($loadCategories);
         }
 
-              
+        $createBookReader = null;
+        if($request->reading_now == true )
+        {
+            $createBookReader = new CreateBookReader(
+                $this->session->getUser_id(), 
+                $request->commentary
+            );
+        }
+        $createBook = new CreateBook(
+            $request->id , 
+            $request->title , 
+            $request->description , 
+            $request->isbn , 
+            $request->isbn13  
+        );        
         
-        
+        $userAddedBookEvent = new UserAddedBook(
+            $createBook , 
+            $createBookReader , 
+            $loadCategories->getUnindentifiedCategories()
+        );
 
+        $this->domain->apply($userAddedBookEvent);
 
         $this->domain->saveEntities();
 

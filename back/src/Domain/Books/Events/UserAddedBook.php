@@ -14,21 +14,18 @@ class UserAddedBook implements DomainEvent
      * Summary of categories
      * @var array<CreateCategory>
      */
-    private array $createCategories;
+    private ?array $createCategories;
         
-    private array $createBookCategory;
 
     public function __construct(
         CreateBook $createBook,
         CreateBookReader $createBookReader,
-        array $createBookCategory,
         array $createCategories,
         )
     {
         $this->createBook = $createBook;
         $this->createBookReader = $createBookReader;
         $this->createCategories = $this->setCreateCategories($createCategories);
-        $this->createBookCategory = $this->setCreateBookCategory($createBookCategory);
     }
     public function setCreateCategories(array $createCategories ) : array
     {
@@ -43,12 +40,6 @@ class UserAddedBook implements DomainEvent
             : false;
     }
     
-    public function setCreateBookCategory(array $createBookCategory ) : array
-    {
-        return $this->ensureClassIsValid($createBookCategory , CreateCategory::class) 
-            ? $createBookCategory 
-            : throw new \Exception("");
-    }    
     public function getCreateBook() : CreateBook
     {
         return $this->createBook;

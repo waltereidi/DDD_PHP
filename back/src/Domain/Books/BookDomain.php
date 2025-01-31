@@ -34,7 +34,7 @@ class BookDomain extends AggregateRoot
         
         $this->subscriber->subscribe($e->book);
         
-        $bookcategories =$e->book->getBookCategories();
+        $bookcategories =$e->book->book_categories;
 
         array_walk($bookcategories ,fn($item)
             => array_push($item->id   ,$this->subscriber->subscribe($item) ));
@@ -42,12 +42,12 @@ class BookDomain extends AggregateRoot
         array_walk($bookcategories ,fn($item)
             => array_push($item->id   ,$this->subscriber->subscribe($item) ));
 
-        $readingNow = $e->book->getReadingNow();
+        $readingNow = $e->book->reading_now;
 
         array_walk($readingNow , fn($item) 
             => array_push($item->id   ,$this->subscriber->subscribe($item) ));
         
-        $bookReader = $e->book->getBookReader();
+        $bookReader = $e->book->book_reader;
 
         array_walk($bookReader , fn($item) 
             => array_push($item->id   ,$this->subscriber->subscribe($item) ));
@@ -55,7 +55,7 @@ class BookDomain extends AggregateRoot
     }
     protected function applyLoadCategories( LoadCategories $e):void 
     {
-        
+           
     }
     public function saveEntities()
     {

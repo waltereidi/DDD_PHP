@@ -29,7 +29,10 @@ class LoadCategories  implements DomainEvent
     {
         return $this->identifiedCategories;
     }
-
+    public function getUnindentifiedCategories() : array 
+    {
+        return $this->unidentifiedCategories;
+    }
     /**
      * Summary of replaceCategories
      * Categories requested from repository to be replaced
@@ -44,7 +47,7 @@ class LoadCategories  implements DomainEvent
     {
         foreach($categories as $c ){
             if($c::class !== Category::class)
-                throw new InvalidArgumentException("Array must be of type category");
+                throw new \InvalidArgumentException("Array must be of type category");
         }
     }
     
