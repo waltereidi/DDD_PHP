@@ -36,19 +36,19 @@ class CreateBook implements DomainEvent
             ? Uuid::fromString($this->id)
             : Uuid::uuid4();
     }
-    public function title(): string
+    public function getTitle(): string
     {
         return $this->title;
     }
-    public function description(): string
+    public function getDescription(): string
     {
         return $this->description;
     }
-    public function isbn(): string
+    public function getIsbn(): string
     {
         return $this->isbn;
     }
-    public function isnb13(): string
+    public function getIsnb13(): string
     {
         return $this->isbn13;
     }

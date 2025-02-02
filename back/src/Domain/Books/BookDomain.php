@@ -8,15 +8,16 @@ use App\Domain\DomainEventPublisher;
 use App\Domain\Books\Events\LoadCategories;
 use App\Entity as Entity;
 
+use App\Entity\Book;
 use App\Repository\DomainRepository\BookDomain\BookDomainRepository;
+use Ramsey\Uuid\Lazy\LazyUuidFromString;
+use Ramsey\Uuid\Uuid;
 
 class BookDomain extends AggregateRoot 
 {
     protected readonly BookDomainRepository $repository;        
     private readonly DomainEventPublisher $subscriber; 
     
-    /** @var BookDomainSubscribedIndex */
-    private array $subscribedIndex = [];
     public function __construct(BookId $bookId  , BookDomainRepository $repository ) 
     {
         parent::__construct($bookId);
@@ -37,32 +38,28 @@ class BookDomain extends AggregateRoot
         $bookcategories =$e->book->book_categories;
 
         array_walk($bookcategories ,fn($item)
-            => array_push($item->id   ,$this->subscriber->subscribe($item) ));
+            => $this->subscriber->subscribe($item) );
         
         array_walk($bookcategories ,fn($item)
-            => array_push($item->id   ,$this->subscriber->subscribe($item) ));
+            => $this->subscriber->subscribe($item));
 
         $readingNow = $e->book->reading_now;
 
         array_walk($readingNow , fn($item) 
-            => array_push($item->id   ,$this->subscriber->subscribe($item) ));
+            => $this->subscriber->subscribe($item));
         
         $bookReader = $e->book->book_reader;
 
         array_walk($bookReader , fn($item) 
-            => array_push($item->id   ,$this->subscriber->subscribe($item) ));
+            => $this->subscriber->subscribe($item));
         
     }
     protected function applyLoadCategories( LoadCategories $e):void 
     {
-        $categories = $e->getCategoriesWithId();
+        $identifiedCategories = $e->getCategoriesWithId();
         
-        array_walk($bookcategories ,fn($item)
-            => array_push($item->id   ,$this->subscriber->subscribe($item) ));
-        
-            
-        
-           
+        array_walk($identifiedCategories ,fn($item)
+            => $this->subscriber->subscribe($item));                 
     }
     public function saveEntities()
     {
@@ -82,11 +79,14 @@ class BookDomain extends AggregateRoot
  
     protected function applyUserAddedBook(UserAddedBook $e) :void
     {
-
-        
-        
-                        
-
+        $book = $e->getCreateBook();
+        if($book->id == null)
+        {
+            $book->id = Uuid::uuid4()->toString();   
+            $bookEntity = new Book();
+            $bookEntity->id = Uuid::fromString($book->id); 
+            $this->subscriber->subscribe($bookEntity);
+        }
     }
     
 

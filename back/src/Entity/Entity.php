@@ -1,6 +1,7 @@
 <?php 
 
 namespace App\Entity;
+use App\Domain\DomainEvent;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\Lazy\LazyUuidFromString;
 abstract class Entity 
@@ -29,6 +30,16 @@ abstract class Entity
             $this->updated_at = new \DateTime();
     }
 
+    public function handle(DomainEvent $e) :void
+    {
+        array_push($this->events , $e);
+        $this->when($e);
+        $this->ensureValidState();
+    }
+    protected function when(DomainEvent $e):void{ 
 
+    }
+    protected function ensureValidState():void{
 
+    }
 }

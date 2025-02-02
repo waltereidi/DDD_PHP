@@ -9,6 +9,8 @@ use App\Domain\Subscriber;
 use App\Repository\BookRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use InvalidArgumentException;
+use Symfony\Component\OptionsResolver\Exception\NoSuchOptionException;
 
 #[ORM\Entity(repositoryClass: BookRepository::class)]
 class Book extends Entity implements Subscriber
@@ -34,20 +36,31 @@ class Book extends Entity implements Subscriber
     public ?Collection  $reading_now = null; 
   
 
-    public function handle(DomainEvent $e) :void
+    protected function ensureValidState():void 
     {
-        array_push($this->events , $e);
-        $this->when($e);
-        $this->ensureValidState();
-    }
-    public function ensureValidState():void 
-    {
+        if (!preg_match('/^(97[89])?\d{9}(\d|X)$/', $this->isbn)) {
+            throw new InvalidArgumentException('invalid ISBN');
+        }
+        if (!preg_match('/^(97[89])?\d{9}(\d|X)$/', $this->isbn13)) {
+            throw new InvalidArgumentException('invalid ISBN');
+        }
 
     }
 
-    public function when(DomainEvent $e) :void
+    protected function when(DomainEvent $e) :void
     {
-        
+        switch($e::class)
+        {
+            case CreateBook::class : $this->handleCreateBook($e);break;
+            default: throw new NoSuchOptionException($e::class);
+        }
+    }
+    private function handleCreateBook(CreateBook $e) :void 
+    {
+        $this->title = $e->getTitle();
+        $this->isbn = $e->getIsbn();
+        $this->isbn13 = $e->getIsnb13();
+        $this->description = $e->getDescription();
     }
     public function isSubscribedTo(DomainEvent $e) : bool
     {

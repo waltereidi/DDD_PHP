@@ -61,28 +61,6 @@ class BookService implements ApplicationServiceInterface
     
             $this->domain->apply(new LoadBook($book));
         }
-        
-        $loadCategories = null; 
-        if( count($request->categories) > 0 )
-        {
-            $loadCategories = new LoadCategories($request->categories);
-        
-            $categoriesToReplace = $this->repository
-                ->getCategoriesById($loadCategories->getCategoriesWithId());
-
-            $loadCategories->replaceCategories( $categoriesToReplace );
-            
-            $this->domain->apply($loadCategories);
-        }
-
-        $createBookReader = null;
-        if($request->reading_now == true )
-        {
-            $createBookReader = new CreateBookReader(
-                $this->session->getUser_id(), 
-                $request->commentary
-            );
-        }
         $createBook = new CreateBook(
             $request->id , 
             $request->title , 
@@ -90,14 +68,36 @@ class BookService implements ApplicationServiceInterface
             $request->isbn , 
             $request->isbn13  
         );        
-        
-        $userAddedBookEvent = new UserAddedBook(
-            $createBook , 
-            $createBookReader , 
-            $loadCategories->getUnindentifiedCategories()
-        );
+        $this->domain->apply($createBook );
 
-        $this->domain->apply($userAddedBookEvent);
+
+        
+        $loadCategories = null; 
+        if( count($request->categories) > 0 )
+        {
+            $loadCategories = new LoadCategories($request->categories);
+        
+            $categoriesToReplace = $this->repository
+                ->getCategoriesByIdNotInBook($loadCategories->getCategoriesWithId()
+                    ,$request->id );
+                    
+
+            $loadCategories->replaceCategories( $categoriesToReplace );
+            
+            $this->domain->apply($loadCategories);
+        }
+        
+        if($request->reading_now == true )
+        {
+            $createBookReader = new CreateBookReader(
+                $this->session->getUser_id(), 
+                $request->commentary
+            );
+            $this->domain->apply($createBookReader);
+        }
+
+        
+
 
         $this->domain->saveEntities();
 

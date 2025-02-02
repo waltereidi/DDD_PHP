@@ -4,10 +4,12 @@ namespace App\Repository\DomainRepository\BookDomain;
 
 use App\Contracts\UI\Pagination;
 use App\Entity\Book;
+use App\Entity\BookCategory;
 use App\Repository as Repository;
 use Doctrine\Persistence\ConnectionRegistry;
 use Doctrine\Persistence\ManagerRegistry;
 use Ramsey\Uuid\Lazy\LazyUuidFromString;
+use Doctrine\ORM\Query\Expr\Join;
 
 class BookDomainRepository 
 {
@@ -35,11 +37,25 @@ class BookDomainRepository
         $book = $this->bookRepository->find($uuid);
         return $book;
     }
-    public function getCategoriesById(array $categories) : array 
+    public function getCategoriesByIdNotInBook(array $categories ,string $book_id ) : array 
     {
-        $ids = array_map(fn($c)=> $c->id, $categories);
+        $ids = array_map(fn($c)=> $c->id->toString(), $categories);
+
         return $this->categoryRepository
-            ->findBy(array('id' => $ids));
+        ->createQueryBuilder('c')
+        ->leftJoin(
+            BookCategory::class,
+            'bc', 
+            Join::WITH,
+            'bc.category_id = c.id' 
+        )
+        ->where('bc.book = :book_id  AND bc.id IS NULL ')
+        ->andWhere('c.id IN (:ids)')
+        ->setParameter('book_id', $book_id) 
+        ->setParameter('ids', $ids)
+        ->getQuery()
+        ->getResult();
+            
     }
 
     public function getMainPageBooks(Pagination $pagination): array

@@ -44,7 +44,7 @@ class UserAddedBook implements DomainEvent
     {
         return $this->createBook;
     }
-    public function createBookReader() : CreateBookReader
+    public function getCreateBookReader() : CreateBookReader
     {
         return $this->createBookReader;
     }   
