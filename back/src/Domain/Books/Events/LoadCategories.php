@@ -1,13 +1,15 @@
 <?php 
 namespace App\Domain\Books\Events;
 
+use App\Controller\Contracts\Home\V1\UserAddedCategory;
 use App\Domain\DomainEvent;
 use App\Entity\Category;
+use Ramsey\Uuid\Uuid;
 
 class LoadCategories  implements DomainEvent
 {
     /**
-     * @var App\Entity\Category;
+     * @var UserAddedCategory;
      */
     private array $identifiedCategories = [];
     private array $unidentifiedCategories = [];
@@ -16,10 +18,13 @@ class LoadCategories  implements DomainEvent
     {
         $this->occurredOn = new \DateTimeImmutable(); 
 
-        $this->ensureCategoriesClass($categories);
+        $this->ensureClassUserAddedCategory($categories);
         
-        $this->identifiedCategories = array_filter($categories , fn($x) => $x->id != null);
-        $this->identifiedCategories = array_filter($categories , fn($x) => $x->id == null);
+        $this->identifiedCategories = array_filter($categories , fn($x) 
+            => $x->id != null);
+
+        $this->identifiedCategories = array_filter($categories , fn($x) 
+            => $x->id == null);
     }
     public function occurredOn(): \DateTimeImmutable{
         return $this->occurredOn;
@@ -29,6 +34,7 @@ class LoadCategories  implements DomainEvent
     {
         return $this->identifiedCategories;
     }
+
     public function getUnindentifiedCategories() : array 
     {
         return $this->unidentifiedCategories;
@@ -43,10 +49,10 @@ class LoadCategories  implements DomainEvent
     {
         $this->identifiedCategories = $categories;
     }
-    private function ensureCategoriesClass(array $categories):void 
+    private function ensureClassUserAddedCategory(array $categories):void 
     {
         foreach($categories as $c ){
-            if($c::class !== Category::class)
+            if($c::class !== UserAddedCategory::class)
                 throw new \InvalidArgumentException("Array must be of type category");
         }
     }

@@ -3,7 +3,7 @@
 namespace App\Domain\Books\Events;
 use App\Domain\DomainEvent;
 use Ramsey\Uuid\Lazy\LazyUuidFromString;
-use Ramsey\Uuid\Uuid;
+
 
 class CreateBookCategory implements DomainEvent
 {
@@ -19,7 +19,7 @@ class CreateBookCategory implements DomainEvent
 	}
     public function getId(): LazyUuidFromString
     {
-        return $this->id ;
+        return $this->id;
     }
 	public function occurredOn(): \DateTimeImmutable
 	{

@@ -55,6 +55,13 @@ class BookDomain extends AggregateRoot
     }
     protected function applyLoadCategories( LoadCategories $e):void 
     {
+        $categories = $e->getCategoriesWithId();
+        
+        array_walk($bookcategories ,fn($item)
+            => array_push($item->id   ,$this->subscriber->subscribe($item) ));
+        
+            
+        
            
     }
     public function saveEntities()
