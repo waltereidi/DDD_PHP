@@ -1,7 +1,7 @@
 <?php 
 
 
-namespace App\Tests\Repository;
+namespace App\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;

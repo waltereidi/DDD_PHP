@@ -2,7 +2,7 @@
 namespace App\ApplicationService;
 
 use ApiPlatform\Metadata\Exception\ItemNotFoundException;
-use App\Contracts\UI\Pagination;
+use App\Controller\Contracts\UI\Pagination;
 use App\Domain\Books\BookDomain;
 use App\Domain\Books\BookId;
 use App\Domain\Books\Events\CreateBook;

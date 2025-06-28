@@ -26,7 +26,7 @@ class BookCategory extends Entity implements Subscriber
         $this->when($e);
         $this->ensureValidState();
     }
-    private function ensureValidState():void 
+    public function ensureValidState():void 
     {
 
     }

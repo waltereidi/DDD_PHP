@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Contracts\UI;
+namespace App\Controller\Contracts\UI;
 class Pagination
 {
     

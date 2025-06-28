@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Tests\Repository;
-use App\Contracts\UI\Pagination;
+use App\Controller\Contracts\UI\Pagination;
 use App\Entity\Category;
 use App\Repository\DomainRepository\BookDomain\BookDomainRepository;
 use Doctrine\Persistence\ManagerRegistry;

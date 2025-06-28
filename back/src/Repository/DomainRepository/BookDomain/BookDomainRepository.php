@@ -2,7 +2,7 @@
 
 namespace App\Repository\DomainRepository\BookDomain;
 
-use App\Contracts\UI\Pagination;
+use App\Controller\Contracts\UI\Pagination;
 use App\Entity\Book;
 use App\Entity\BookCategory;
 use App\Repository as Repository;

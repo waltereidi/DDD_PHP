@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\ApplicationService\BookService;
 
-use App\Contracts\UI\Pagination;
+use App\Controller\Contracts\UI\Pagination;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
