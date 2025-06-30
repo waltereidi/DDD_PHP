@@ -26,12 +26,12 @@
 </h2>
 <blockquote>
     <p>
-        <span class="Y2IQFc" lang="pt" dir="ltr">“Perguntar uma questão não deveria modificar sua resposta” - Bertrand Meyer</span><br>
-        <span class="Y2IQFc" lang="pt" dir="ltr">Este princípio de design afirma que cada método deve ser um Comando, que executa uma ação, ou uma Consulta, que retorna dados ao chamador, mas não ambos.</span>
+        “Perguntar uma questão não deveria modificar sua resposta” - Bertrand Meyer<br>
+        Este princípio de design afirma que cada método deve ser um Comando, que executa uma ação, ou uma Consulta, que retorna dados ao chamador, mas não ambos.
     </p>
 </blockquote>
 <h2>
-    <span class="Y2IQFc" lang="pt" dir="ltr">1.4 Fonte de Eventos</span>
+    1.4 Fonte de Eventos
 </h2>
 <p>
     <span class="Y2IQFc" lang="pt" dir="ltr">O CQRS é uma arquitetura poderosa e flexível. Há um benefício adicional em relação à coleta e ao salvamento de eventos de domínio (que ocorreram durante uma operação de agregação), proporcionando um alto nível de detalhes sobre o que está acontecendo em seu domínio. Eventos de Domínio são um dos principais padrões táticos devido à sua importância dentro do domínio, pois descrevem ocorrências passadas</span>
