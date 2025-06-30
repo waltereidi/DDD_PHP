@@ -78,9 +78,9 @@ estado dos Agregados como uma sequência linear de eventos</span></pre>
         </div>
         </g-expandable-container>
     </div>
-    <div class="KFFQ0c xKf9F" style="-webkit-text-stroke-width:0px;align-items:center;background-color:rgb(255, 255, 255);color:rgb(31, 31, 31);display:flex;font-family:Arial, sans-serif;font-size:medium;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;margin-bottom:0px;margin-top:16px;orphans:2;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;width:652px;word-spacing:0px;">
+
         A ideia fundamental por trás do Event Sourcing é expressar o estado dos Agregados como uma sequência linear de eventos
-    </div>
+
 </blockquote>
 <h2>
     1.5 Value Objects
