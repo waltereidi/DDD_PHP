@@ -44,7 +44,7 @@
                 <div class="tw-src-ltr" style="display:flex;min-height:140px;position:relative;" id="tw-ob">
                     <div class="oSioSc" style="-webkit-box-flex:1;display:flex;flex:1 1 0%;width:0px;">
                         <div style="-webkit-box-flex:1;background-color:rgb(248, 249, 250);border-radius:8px;display:flex;flex-direction:column;flex:1 1 0%;font-size:0px;margin:0px;min-width:0px;position:relative;text-align:initial;width:0px;" id="tw-target">
-                            <div class="g9WsWb PZPZlf" style="display:block;flex:1 1 auto;font-size:0px;margin:0px;padding:10px 16px 48px;position:relative;text-align:initial;" id="kAz1tf" data-attrid="tw-targetArea" data-entityname="Google Translate">
+                          
 A ideia fundamental por trás do Event Sourcing é expressar o estado dos Agregados como uma sequência linear de eventos
 
                                
