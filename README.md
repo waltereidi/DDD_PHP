@@ -37,16 +37,9 @@
     <span class="Y2IQFc" lang="pt" dir="ltr">O CQRS é uma arquitetura poderosa e flexível. Há um benefício adicional em relação à coleta e ao salvamento de eventos de domínio (que ocorreram durante uma operação de agregação), proporcionando um alto nível de detalhes sobre o que está acontecendo em seu domínio. Eventos de Domínio são um dos principais padrões táticos devido à sua importância dentro do domínio, pois descrevem ocorrências passadas</span>
 </p>
 <blockquote>
-    <div class="nev7se" style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);color:rgb(31, 31, 31);font-family:Arial, sans-serif;font-size:medium;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;" data-cp="1" data-nnttsvi="1" data-ntl-fpwrite="true" data-sletp="false" data-sm="1" data-ssbp="false" data-sugg-time="500" data-sugg-url="https://clients1.google.com/complete/search" data-uilc="pt-BR" data-vil=",af,af-ZA,am,am-ET,ar-EG,ar-AE,ar-KW,ar-QA,ar,ar-IL,ar-JO,ar-LB,ar-PS,az,az-AZ,bg,bg-BG,bn,bn-BD,bn-IN,ca,ca-es,cs,cs-CZ,de,de-DE,de-CH,de-AT,de-LI,en,en-US,en-CA,en-AU,en-NZ,en-GB,en-IN,en-KE,en-TZ,en-NG,en-GH,en-PH,en-ZA,es,es-ES,es-AR,es-UY,es-419,es-BO,es-CL,es-CR,es-CO,es-DO,es-EC,es-GT,es-HN,es-NI,es-PA,es-PE,es-PR,es-PY,es-SV,es-VE,es-MX,es-US,eu,eu-ES,fi,fi-FI,fr,fr-FR,fr-CH,fr-BE,gl,gl-ES,gu,gu-IN,he,he-IL,iw,iw-IL,hu,hu-HU,hy,hy-AM,id,id-ID,is,is-IS,it,it-IT,it-CH,ja,ja-JP,jv,jv-ID,ka,ka-GE,km,km-KH,kn,kn-IN,ko,ko-KR,la,lo,lo-LA,lv,lv-LV,ml,ml-IN,mr,mr-IN,ms,ms-MY,nl,nl-NL,nb,nb-NO,ne,ne-NP,pl,pl-PL,pt,pt-BR,pt-PT,ro,ro-RO,ru,ru-RU,si-LK,sk,sk-SK,sr,sr-RS,su,su-ID,sv,sv-SE,sw,sw-TZ,sw-KE,ta,ta-IN,ta-SG,ta-LK,ta-MY,te,te-IN,tr,tr-TR,ur,ur-PK,ur-IN,yue,yue-HK,yue-Hant-HK,zh-HK,zh,zh-CN,zh-cmn,zh-cmn-CN,zh-Hans,zh-Hans-CN,zh-cmn-Hans,zh-cmn-Hans-CN,cmn-CN,cmn-Hans,cmn-Hans-CN,zh-TW,zh-Hant-TW,cmn-TW,cmn-Hant-TW,zh-cmn-TW,zh-cmn-Hant-TW,zu,zu-ZA,hi,hi-IN,tl,tl-PH,pa,pa-IN" id="tw-container">
-        <g-expandable-container style="display:block;" jscontroller="QE1bwd" data-npd="1" data-slct="mnr-c" jsshadow="" jsaction="C7xow:Z6bwpe;xNpQtd:Nh5q2c;U6VCqe:GsRPff;Ep2Mgc:AgioGc;BDs6B:fW2qAb;ep03Ne:AvkpRc;gvA4Rc:yELBLe">
-        <div jsname="gI9xcc" jsslot="1">
-            <div jscontroller="tZEiM" jsdata="SANFE;_;Ckcmn8" jsaction="uQxhTd:d4hecb;lWUBqb:TO5MWb;IcWBXe:hLaFAe;KFlBO:UuREqb;M2HAEc:eNrnOd;KyPa0e:Gz3GTb;rcuQ6b:npT2md">
-                <div class="tw-src-ltr" style="display:flex;min-height:140px;position:relative;" id="tw-ob">
-                    <div class="oSioSc" style="-webkit-box-flex:1;display:flex;flex:1 1 0%;width:0px;">
-                        <div style="-webkit-box-flex:1;background-color:rgb(248, 249, 250);border-radius:8px;display:flex;flex-direction:column;flex:1 1 0%;font-size:0px;margin:0px;min-width:0px;position:relative;text-align:initial;width:0px;" id="tw-target">
-                          
+                            
 A ideia fundamental por trás do Event Sourcing é expressar o estado dos Agregados como uma sequência linear de eventos
-
+</blockquote>
                                
 <h2>
     1.5 Value Objects
