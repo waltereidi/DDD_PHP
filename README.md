@@ -47,40 +47,9 @@
                             <div class="g9WsWb PZPZlf" style="display:block;flex:1 1 auto;font-size:0px;margin:0px;padding:10px 16px 48px;position:relative;text-align:initial;" id="kAz1tf" data-attrid="tw-targetArea" data-entityname="Google Translate">
                                 <div class="tw-ta-container tw-nfl" style="outline:0px;overflow:hidden;position:relative;" id="tw-target-text-container" tabindex="0" role="text">
                                     
-                                                                        A ideia fundamental por trás do Event Sourcing é expressar o
-estado dos Agregados como uma sequência linear de eventos</pre>
+                                                                        A ideia fundamental por trás do Event Sourcing é expressar o estado dos Agregados como uma sequência linear de eventos
                                 </div>
-                                <div class="tw-target-rmn tw-ta-container tw-nfl" style="outline:0px;overflow:hidden;position:relative;" id="tw-target-rmn-container" tabindex="0" role="text">
-                                    <pre class="tw-data-placeholder tw-text-small tw-ta" style="background-color:transparent;border-style:none;color:black;font-family:inherit;font-size:16px;font-weight:normal;line-height:24px;margin:0px;overflow-wrap:break-word;overflow:hidden;padding:0px 0.14em 0px 0px;position:relative;resize:none;text-align:left;unicode-bidi:isolate;white-space:pre-wrap;width:270px;" data-placeholder="" id="tw-target-rmn" dir="ltr"><span class="Y2IQFc"></span>
-                                </div>
-                                <div class="iYB33c" style="bottom:0px;display:flex;height:48px;justify-content:space-between;left:0px;position:absolute;width:302px;" jsname="fek9E">
-                                    <div class="tw-menu" style="display:inline-block;left:0px;line-height:normal;position:absolute;white-space:nowrap;" id="tw-tmenu">
-                                        <span class="tw-menu-btn" style="color:rgb(94, 94, 94);cursor:pointer;display:inline-block;height:48px;margin-left:8px;outline:0px;overflow:hidden;transform:rotateX(180deg);width:48px;" data-action-target="target" jsaction="kImuFf" id="tw-cpy-btn" title="Copiar" aria-label="Copiar o texto traduzido" role="button" tabindex="0" data-ved="2ahUKEwjum776z5eOAxXpJLkGHYT3CCYQ69UBegQIChAW"><span class="tw-menu-btn-image z1asCe wm4nBd" style="border:1px solid transparent;display:inline-block;fill:currentcolor;height:24px;line-height:24px;padding:10px;position:relative;width:24px;"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24"><g><rect fill="none" height="24" width="24"></rect></g><g><path d="M16,20H5V6H3v14c0,1.1,0.9,2,2,2h11V20z M20,16V4c0-1.1-0.9-2-2-2H9C7.9,2,7,2.9,7,4v12c0,1.1,0.9,2,2,2h9 C19.1,18,20,17.1,20,16z M18,16H9V4h9V16z"></path></g></svg></span></span><span class="fQjaD" style="bottom:6px;display:inline-block;position:relative;right:-24px;" id="_yLZhaO6XKenJ5OUPhO-jsAI_46" jscontroller="cZphsd" data-pronunciation-action-target="target" aria-hidden="true" jsaction="mjwztf:V46pce;NcryF:jBJHNe;pD7Wob:tVADEe"><g-bubble jsname="VCkuzd" jscontroller="QVaUhf" data-du="200" jsaction="R9S7w:VqIRre;" jsshadow=""><span class="c5aZPb" style="cursor:pointer;display:inline-block;" jsname="d6wfac" data-extra-container-classes="tw-promo-bubble" data-extra-triangle-classes="tw-promo-triangle" data-hover-hide-delay="1000" data-hover-open-delay="500" data-send-dismiss-event="true" data-theme="0" data-width="0" data-zidx="1" jsaction="vQLyHf" jsslot=""></span></g-bubble></span><span class="tw-menu-btn za3ale" style="color:rgb(94, 94, 94);cursor:pointer;display:inline-block;height:48px;margin-left:8px;outline:0px;overflow:hidden;width:48px;" jscontroller="tDZ6eb" data-action-target="target" data-sttse="true" id="tw-spkr-button" aria-label="Ouvir tradução" role="button" tabindex="0" jsaction="KjsqPd;rcuQ6b:npT2md;WxjQaf:WRB97d;UpNfPc:Xnrsoe;f2MWRb:QKiGd" data-ved="2ahUKEwjum776z5eOAxXpJLkGHYT3CCYQ8DR6BAgKEBk"><span class="tw-menu-btn-image z1asCe JKu1je" style="border:1px solid transparent;display:inline-block;fill:currentcolor;height:24px;line-height:24px;padding:10px;position:relative;width:24px;" title="Ouvir"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"></path></svg></span></span><span></span>
-                                    </div>
-                                </div>
-                                <g-info-bubble id="tw-info-bubble" jscontroller="f3ruEc" jsaction="rcuQ6b:npT2md"></g-info-bubble>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="tw-images">
-                </div>
-                <div class="dURPtb" style="clear:both;line-height:16px;overflow:hidden;">
-                </div>
-                <div jsaction="iJE3Ge:yuFC7d;DmzWq:nuBux">
-                    <g-expandable-container style="display:block;" jsname="FYBCae" jscontroller="QE1bwd" data-npd="1" data-slct="mnr-c" jsshadow="" jsaction="C7xow:Z6bwpe;xNpQtd:Nh5q2c;U6VCqe:GsRPff;Ep2Mgc:AgioGc;BDs6B:fW2qAb;ep03Ne:AvkpRc;gvA4Rc:yELBLe">
-                    <div jsname="gI9xcc" jsslot="1">
-                    </div>
-                    </g-expandable-container>
-                </div>
-            </div>
-        </div>
-        </g-expandable-container>
-    </div>
-
-        A ideia fundamental por trás do Event Sourcing é expressar o estado dos Agregados como uma sequência linear de eventos
-
-</blockquote>
+                               
 <h2>
     1.5 Value Objects
 </h2>
