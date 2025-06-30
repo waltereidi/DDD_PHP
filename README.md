@@ -120,9 +120,8 @@ estado dos Agregados como uma sequência linear de eventos</span></pre>
 <p>
     Um modelo de objeto do domínio que incorpora comportamento e dados.
 </p>
-<figure class="image" data-ckbox-resource-id="tSTxxPdSRKAd">
-    <picture><source srcset="https://ckbox.cloud/4b670c997b9c3a9c7b5b/assets/tSTxxPdSRKAd/images/80.webp 80w,https://ckbox.cloud/4b670c997b9c3a9c7b5b/assets/tSTxxPdSRKAd/images/160.webp 160w,https://ckbox.cloud/4b670c997b9c3a9c7b5b/assets/tSTxxPdSRKAd/images/240.webp 240w,https://ckbox.cloud/4b670c997b9c3a9c7b5b/assets/tSTxxPdSRKAd/images/320.webp 320w,https://ckbox.cloud/4b670c997b9c3a9c7b5b/assets/tSTxxPdSRKAd/images/400.webp 400w,https://ckbox.cloud/4b670c997b9c3a9c7b5b/assets/tSTxxPdSRKAd/images/480.webp 480w,https://ckbox.cloud/4b670c997b9c3a9c7b5b/assets/tSTxxPdSRKAd/images/560.webp 560w,https://ckbox.cloud/4b670c997b9c3a9c7b5b/assets/tSTxxPdSRKAd/images/640.webp 640w,https://ckbox.cloud/4b670c997b9c3a9c7b5b/assets/tSTxxPdSRKAd/images/720.webp 720w,https://ckbox.cloud/4b670c997b9c3a9c7b5b/assets/tSTxxPdSRKAd/images/748.webp 748w" sizes="(max-width: 748px) 100vw, 748px" type="image/webp"><img src="https://ckbox.cloud/4b670c997b9c3a9c7b5b/assets/tSTxxPdSRKAd/images/748.png" width="748" height="410"></picture>
-</figure>
+![image](https://github.com/user-attachments/assets/81d3fd36-9a76-4a8c-8eb0-f4bf6f5ba02b)
+
 <p>
     Na pior das hipóteses, a lógica de negócios pode ser muito complexa. Regras e lógica descrevem muitos casos e inclinações de comportamento diferentes, e é com essa complexidade que os objetos foram projetados para trabalhar. Um Modelo de Domínio cria uma rede de objetos interconectados, onde cada objeto representa algum indivíduo significativo, seja ele do tamanho de uma corporação ou do tamanho de uma única linha em um formulário de pedido.
 </p>
@@ -132,9 +131,8 @@ estado dos Agregados como uma sequência linear de eventos</span></pre>
 <h2>
     2.0 Clean Architeture
 </h2>
-<figure class="image" data-ckbox-resource-id="bD-4A40U6Lz0">
-    <picture><source srcset="https://ckbox.cloud/4b670c997b9c3a9c7b5b/assets/bD-4A40U6Lz0/images/80.webp 80w,https://ckbox.cloud/4b670c997b9c3a9c7b5b/assets/bD-4A40U6Lz0/images/160.webp 160w,https://ckbox.cloud/4b670c997b9c3a9c7b5b/assets/bD-4A40U6Lz0/images/240.webp 240w,https://ckbox.cloud/4b670c997b9c3a9c7b5b/assets/bD-4A40U6Lz0/images/320.webp 320w,https://ckbox.cloud/4b670c997b9c3a9c7b5b/assets/bD-4A40U6Lz0/images/345.webp 345w" sizes="(max-width: 345px) 100vw, 345px" type="image/webp"><img src="https://ckbox.cloud/4b670c997b9c3a9c7b5b/assets/bD-4A40U6Lz0/images/345.png" width="345" height="225"></picture>
-</figure>
+![image](https://github.com/user-attachments/assets/dbb2f6dd-a23d-4834-926b-63652f541045)
+
 <h3>
     <br>
     <span style="background-color:rgb(248,249,250);color:rgb(31,31,31);font-family:Arial, sans-serif;font-size:28px;"><span style="-webkit-text-stroke-width:0px;display:inline !important;float:none;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:left;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:pre-wrap;widows:2;word-spacing:0px;">A REGRA DA DEPENDÊNCIA</span></span>
