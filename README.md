@@ -120,7 +120,7 @@ estado dos Agregados como uma sequência linear de eventos</span></pre>
 <p>
     Um modelo de objeto do domínio que incorpora comportamento e dados.
 </p>
-![image](https://github.com/user-attachments/assets/81d3fd36-9a76-4a8c-8eb0-f4bf6f5ba02b)
+<src href="https://github.com/user-attachments/assets/81d3fd36-9a76-4a8c-8eb0-f4bf6f5ba02b">
 
 <p>
     Na pior das hipóteses, a lógica de negócios pode ser muito complexa. Regras e lógica descrevem muitos casos e inclinações de comportamento diferentes, e é com essa complexidade que os objetos foram projetados para trabalhar. Um Modelo de Domínio cria uma rede de objetos interconectados, onde cada objeto representa algum indivíduo significativo, seja ele do tamanho de uma corporação ou do tamanho de uma única linha em um formulário de pedido.
@@ -131,7 +131,7 @@ estado dos Agregados como uma sequência linear de eventos</span></pre>
 <h2>
     2.0 Clean Architeture
 </h2>
-![image](https://github.com/user-attachments/assets/dbb2f6dd-a23d-4834-926b-63652f541045)
+<src href="https://github.com/user-attachments/assets/dbb2f6dd-a23d-4834-926b-63652f541045">
 
 <h3>
     <br>
