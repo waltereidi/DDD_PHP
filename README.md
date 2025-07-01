@@ -37,10 +37,10 @@
     <span class="Y2IQFc" lang="pt" dir="ltr">O CQRS é uma arquitetura poderosa e flexível. Há um benefício adicional em relação à coleta e ao salvamento de eventos de domínio (que ocorreram durante uma operação de agregação), proporcionando um alto nível de detalhes sobre o que está acontecendo em seu domínio. Eventos de Domínio são um dos principais padrões táticos devido à sua importância dentro do domínio, pois descrevem ocorrências passadas</span>
 </p>
 <blockquote>
-                            
-A ideia fundamental por trás do Event Sourcing é expressar o estado dos Agregados como uma sequência linear de eventos
+    <p>
+        A ideia fundamental por trás do Event Sourcing é expressar o estado dos Agregados como uma sequência linear de eventos
+    </p>
 </blockquote>
-                               
 <h2>
     1.5 Value Objects
 </h2>
@@ -79,26 +79,33 @@ A ideia fundamental por trás do Event Sourcing é expressar o estado dos Agrega
 <p>
     Um modelo de objeto do domínio que incorpora comportamento e dados.
 </p>
-<img src="https://github.com/user-attachments/assets/81d3fd36-9a76-4a8c-8eb0-f4bf6f5ba02b">
-
+<p>
+    <img src="https://github.com/user-attachments/assets/81d3fd36-9a76-4a8c-8eb0-f4bf6f5ba02b">
+</p>
 <p>
     Na pior das hipóteses, a lógica de negócios pode ser muito complexa. Regras e lógica descrevem muitos casos e inclinações de comportamento diferentes, e é com essa complexidade que os objetos foram projetados para trabalhar. Um Modelo de Domínio cria uma rede de objetos interconectados, onde cada objeto representa algum indivíduo significativo, seja ele do tamanho de uma corporação ou do tamanho de uma única linha em um formulário de pedido.
 </p>
+<h2>
+    1.20 Aggregate root
+</h2>
 <p>
-    &nbsp;
+    Agregação é um padrão em Design Orientado a Domínio. Uma agregação DDD é um conjunto de objetos de domínio que podem ser tratados como uma única unidade. Um exemplo pode ser um pedido e seus itens de linha; estes serão objetos separados, mas é útil tratar o pedido (junto com seus itens de linha) como um único agregado.<br>
+    Um agregado terá um de seus objetos componentes como a raiz do agregado. Quaisquer referências externas ao agregado devem ir apenas para a raiz do agregado. A raiz pode, portanto, garantir a integridade do agregado como um todo.
 </p>
 <h2>
     2.0 Clean Architeture
 </h2>
-<img src="https://github.com/user-attachments/assets/dbb2f6dd-a23d-4834-926b-63652f541045">
-
+<p>
+    <img src="https://github.com/user-attachments/assets/dbb2f6dd-a23d-4834-926b-63652f541045">
+</p>
 <h3>
     <br>
-    <span style="background-color:rgb(248,249,250);color:rgb(31,31,31);font-family:Arial, sans-serif;font-size:28px;"><span style="-webkit-text-stroke-width:0px;display:inline !important;float:none;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:left;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:pre-wrap;widows:2;word-spacing:0px;">A REGRA DA DEPENDÊNCIA</span></span>
+    <span style="-webkit-text-stroke-width:0px;background-color:rgb(248,249,250);color:rgb(31,31,31);display:inline !important;float:none;font-family:Arial, sans-serif;font-size:28px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:left;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:pre-wrap;widows:2;word-spacing:0px;">A REGRA DA DEPENDÊNCIA</span>
 </h3>
 <blockquote>
- As dependências do código-fonte devem apontar apenas para dentro, em direção a políticas de nível superior</span></pre>
-                             
+    <p>
+        As dependências do código-fonte devem apontar apenas para dentro, em direção a políticas de nível superior
+    </p>
 </blockquote>
 <div class="KFFQ0c xKf9F" style="-webkit-text-stroke-width:0px;align-items:center;background-color:rgb(255, 255, 255);color:rgb(31, 31, 31);display:flex;font-family:Arial, sans-serif;font-size:medium;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;margin-bottom:0px;margin-top:16px;orphans:2;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;width:652px;word-spacing:0px;">
     Nada em um círculo interno pode saber absolutamente nada sobre algo em um círculo externo. Em particular, o nome de algo declarado em um círculo externo não deve ser mencionado pelo código em um círculo interno. Isso inclui funções, classes, variáveis ​​ou qualquer outra entidade de software nomeada.
@@ -112,3 +119,60 @@ A ideia fundamental por trás do Event Sourcing é expressar o estado dos Agrega
 <h2>
     3.0 Codigo fonte
 </h2>
+<p>
+    &nbsp;
+</p>
+<h3>
+    Ordenação das camadas &nbsp;
+</h3>
+<p>
+    src/<br>
+    ├── Entity/ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-1<br>
+    ├── Mapping/ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-2<br>
+    ├── Domain/ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -3<br>
+    ├── Repository/ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -4<br>
+    ├── ApplicationService/ &nbsp; -5<br>
+    ├── Session/ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-6<br>
+    ├── Controller/ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -7<br>
+    &nbsp;
+</p>
+<h3>
+    1 - Entity&nbsp;
+</h3>
+<p>
+    A Camada entidade é implementada com o ORM Doctrine e implementa a classe pai “Entity” e interface "Subscriber".<br>
+    A Classe Entity é a classe abstrata responsável por reaproveitar todas as operações que devem ser comuns á todas as entidades, contém facilidades como criar &nbsp;um novo Uuid , definir data de criação e atualização &nbsp;do objeto , um array publico “events” que deve armazenar todos os eventos que esta entidade participou .
+</p>
+<p>
+    Interface Subscriber implementa a abstração utilizada na raiz da agregação para inscrever um objeto como participante de um domínio.
+</p>
+<h3>
+    2 - Mapping
+</h3>
+<p>
+    É o mapeamento das entidades em XML para o ORM Doctrine, aqui são definidos o mapeamento relacional das entidades que devem acompanhar o banco de dados.
+</p>
+<h3>
+    3- Domain
+</h3>
+<p>
+    Contém todos os agregados e objetos que compoem o funcionamento do domínio para construir uma raiz da agregação e escutar eventos.<br>
+    Toda raiz da agregação extende a classe abstrata AggregateRoot, e deverá registrar dentro dela os inscritos que receberam os eventos, cada evento enviado á raiz da agregação deverá perguntar a todos os seus incritos como este evento deve ser interpretado.<br>
+    A classe concreta DomainEventPublisher é responsável por oferecer um mecanismo de ação para que os inscritos da raiz de agregação recebam os eventos, esta classe aciona<br>
+    &nbsp;
+</p>
+<p>
+    &nbsp;
+</p>
+<p>
+    &nbsp;
+</p>
+<p>
+    &nbsp;
+</p>
+<p>
+    &nbsp;
+</p>
+<p>
+    &nbsp;
+</p>
