@@ -100,7 +100,7 @@
 </p>
 <h3>
     <br>
-    <span style="-webkit-text-stroke-width:0px;background-color:rgb(248,249,250);color:rgb(31,31,31);display:inline !important;float:none;font-family:Arial, sans-serif;font-size:28px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:left;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:pre-wrap;widows:2;word-spacing:0px;">A REGRA DA DEPENDÊNCIA</span>
+    <span style="background-color:rgb(248,249,250);color:rgb(31,31,31);font-family:Arial, sans-serif;font-size:28px;"><span style="-webkit-text-stroke-width:0px;display:inline !important;float:none;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:left;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:pre-wrap;widows:2;word-spacing:0px;">A REGRA DA DEPENDÊNCIA</span></span>
 </h3>
 <blockquote>
     <p>
@@ -156,9 +156,32 @@
     3- Domain
 </h3>
 <p>
-    Contém todos os agregados e objetos que compoem o funcionamento do domínio para construir uma raiz da agregação e escutar eventos.<br>
-    Toda raiz da agregação extende a classe abstrata AggregateRoot, e deverá registrar dentro dela os inscritos que receberam os eventos, cada evento enviado á raiz da agregação deverá perguntar a todos os seus incritos como este evento deve ser interpretado.<br>
-    A classe concreta DomainEventPublisher é responsável por oferecer um mecanismo de ação para que os inscritos da raiz de agregação recebam os eventos, esta classe aciona<br>
+    Contém todos os agregados e objetos que compõem o funcionamento do domínio para construir uma raiz da agregação e escutar eventos.<br>
+    O domínio é inicializado em seu construtor e atribui a sí mesmo uma identidade que poderá ser utilizada para trabalhar com vários domínios ao mesmo tempo, todo evento delegado ao domínio deve seguir por uma SSOT(Unica fonte da verdade) estendido da classe pai, o método publico “<strong>apply</strong>” que recebe como parâmetro uma classe <strong>DomainEvent</strong>.<br>
+    Os repositórios utilizados em cada domínio devem ser pré definidos na classe <strong>BookDomainRepository</strong>, que fornece acesso ao banco de dados através de projeções de models.<br>
+    Para cada evento, o domínio irá reconstruir e validar sua integridade com todos os seus participantes.<br>
+    Os &nbsp;participantes de uma <strong>AggregateRoot </strong>estendem &nbsp;a interface “<strong>Subscriber</strong>”, que utiliza o design pattern <strong>Strategy </strong>da classe <strong>DomainEventPublisher </strong>para acionar um método abstrato de seus participantes.
+</p>
+<h3>
+    4 - Repository
+</h3>
+<p>
+    A camada de repositório é separada em repositórios de um domínio e repositórios individuais, sua consultas devem estar separadas entre consultas que podem ser executadas com repositórios individualmente e consultas que envolvem vários repositórios.
+</p>
+<h3>
+    5 - Application Service
+</h3>
+<p>
+    A camada de serviço se comunica com a camada de presentação através de uma SSOT(Unica fonte da verdade) desta forma todos os comandos recebidos devem atender a uma padronização de entrada e saída, esta camada também é responsável por separar comandos de perguntas e sincronizar as dependências de baixo nível para atender as solicitações da camada de presentação.<br>
+    Atendendo o padrão de arquitetura <strong>CQRS </strong>(Command Query Responsability Segregation) esta camada pode se comunicar diretamente com a camada de repositório apenas para realizar consultas e &nbsp;delegar suas modificações para a camada de domínio.
+</p>
+<h3>
+    6 - Controllers (Presentation)
+</h3>
+<p>
+    A camada de controllers deve haver apenas duas responsabilidades, manusear as requisições HTTP e decidir que fazer com isto.
+</p>
+<p>
     &nbsp;
 </p>
 <p>
