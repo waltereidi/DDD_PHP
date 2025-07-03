@@ -13,8 +13,14 @@ final class HomeControllerTest extends TestCase
     public function testUserCreateBook(): void
     {
         $e =  new V1\UserAddedBook(
-            [new V1\UserAddedCategory("" , "sdsd" , ""),new V1\UserAddedCategory("" , "sdsd" , "")], 
-            "title", "desc" , "sdsds" , "sdsds" ,"", true , ""
+            [new V1\UserAddedCategory("" , "sdsd" , null ),new V1\UserAddedCategory("" , "sdsd" , "")], 
+            "",
+            "title", 
+            "desc" , 
+            "isbn" , 
+            "isbn13" ,
+            true, 
+            "commentary" , 
         );
         
         $serializer = new Serializer([new JsonSerializableNormalizer()], [new JsonEncoder()]);

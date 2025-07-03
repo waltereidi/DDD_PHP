@@ -39,7 +39,7 @@ class HomeController extends BaseController
     {
         $createBook = $serializer->deserialize($request->getContent(), V1\UserAddedBook::class, 'json');
 
-        return $this->handle( $request, V1\UserAddedBook::class);
+        return $this->handle( $createBook, V1\UserAddedBook::class);
     }
 
 }

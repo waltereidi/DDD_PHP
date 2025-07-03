@@ -40,6 +40,8 @@ class BookService implements ApplicationServiceInterface
     //TODO add objects contracts delegated from controller
     public function handle(?object $contract ,string $command):mixed
     {
+        $class = get_class($contract);
+        
         switch($command)
         {
             case 'getLeftBarCategories' : return $this->getLeftBarCategories();

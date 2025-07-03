@@ -3,7 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Category;
-use App\Tests\Repository\ModelProjections;
+use  App\Repository\ModelProjections;
 use Doctrine\Persistence\ManagerRegistry;
 
 class CategoryRepository extends ModelProjections

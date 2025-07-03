@@ -3,7 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\BookCategory;
-use App\Tests\Repository\ModelProjections;
+use  App\Repository\ModelProjections;
 use Doctrine\Persistence\ManagerRegistry;
 
 
