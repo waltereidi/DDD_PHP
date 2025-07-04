@@ -11,7 +11,6 @@ class UserAddedBook
         public string $title , 
         public string $description, 
         public string $isbn , 
-        public string $isbn13 , 
         public bool $reading_now , 
         public string $commentary 
     ){

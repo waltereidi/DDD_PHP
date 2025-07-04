@@ -9,7 +9,7 @@ abstract class Entity
     public ?LazyUuidFromString $id = null;
     public ?\DateTimeInterface $created_at = null;
     public ?\DateTimeInterface $updated_at = null;
-    public ?array $events = null;
+    public ?array $events;
 
     public function getId() : LazyUuidFromString 
     {
@@ -17,9 +17,14 @@ abstract class Entity
     }
     public function __construct() 
     {
+        $this->setNewGuid();
+        $this->setEntityTime();
+        $this->events = array();
     }
     protected function setNewGuid():void
     {
+        if($this->id != null)
+            return;
         $this->id = Uuid::uuid4();
     }
     protected function setEntityTime() : void

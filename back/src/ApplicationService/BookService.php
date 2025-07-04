@@ -68,7 +68,6 @@ class BookService implements ApplicationServiceInterface
             $request->title , 
             $request->description , 
             $request->isbn , 
-            $request->isbn13  
         );        
         $this->domain->apply($createBook );
 

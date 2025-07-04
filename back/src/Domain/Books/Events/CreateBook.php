@@ -12,7 +12,6 @@ class CreateBook implements DomainEvent
     public string $title ; 
     public string|null $description ; 
     public string $isbn;
-    public string $isbn13;
     public \DateTimeImmutable $occurredOn;
 
 
@@ -28,7 +27,6 @@ class CreateBook implements DomainEvent
         $this->title = $title ?? throw new \InvalidArgumentException('title is required');
         $this->description = $description; 
         $this->isbn = $isbn ?? throw new \InvalidArgumentException('isbn is required');
-        $this->isbn13 = $isnb13;
     }
     public function getId(): LazyUuidFromString
     {
@@ -47,10 +45,6 @@ class CreateBook implements DomainEvent
     public function getIsbn(): string
     {
         return $this->isbn;
-    }
-    public function getIsnb13(): string
-    {
-        return $this->isbn13;
     }
     public function occurredOn(): \DateTimeImmutable
     {

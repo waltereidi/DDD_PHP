@@ -18,7 +18,6 @@ class Book extends Entity implements Subscriber
     public string $title;
     public ?string $description = null;
     public string $isbn;
-    public ?string $isbn13 = null;
     /**
      * Refers to categories assigned to this book
      * @var BookCategory
@@ -38,12 +37,7 @@ class Book extends Entity implements Subscriber
 
     protected function ensureValidState():void 
     {
-        if (!preg_match('/^(97[89])?\d{9}(\d|X)$/', $this->isbn)) {
-            throw new InvalidArgumentException('invalid ISBN');
-        }
-        if (!preg_match('/^(97[89])?\d{9}(\d|X)$/', $this->isbn13)) {
-            throw new InvalidArgumentException('invalid ISBN');
-        }
+
 
     }
 
@@ -59,13 +53,12 @@ class Book extends Entity implements Subscriber
     {
         $this->title = $e->getTitle();
         $this->isbn = $e->getIsbn();
-        $this->isbn13 = $e->getIsnb13();
         $this->description = $e->getDescription();
     }
     public function isSubscribedTo(DomainEvent $e) : bool
     {
         if($e::class == CreateBook::class){
-            return (object)$e->id == $this->id;
+            return true;
         }else
             return false;
     }

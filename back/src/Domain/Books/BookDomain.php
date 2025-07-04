@@ -1,6 +1,7 @@
 <?php
 namespace App\Domain\Books;
 use App\Domain\AggregateRoot;
+use App\Domain\Books\Events\CreateBook;
 use App\Domain\Books\Events\LoadBook;
 use App\Domain\Books\Events\UserAddedBook;
 use App\Domain\DomainEvent;
@@ -87,6 +88,13 @@ class BookDomain extends AggregateRoot
             $bookEntity->id = Uuid::fromString($book->id); 
             $this->subscriber->subscribe($bookEntity);
         }
+    }
+    protected function applyCreateBook(CreateBook $e) :void
+    {
+        $book = new Book();
+        $this->subscriber->subscribe($book);
+        
+        $this->subscriber->publish($e);
     }
     
 

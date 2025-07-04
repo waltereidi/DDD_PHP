@@ -9,8 +9,7 @@
 
         <field name="title" type="string" length="255" column="title" nullable="false"/>
         <field name="description" type="string" length="4096" column="description" nullable="true"/>
-        <field name="isbn" type="string" length="13" column="isbn" nullable="false"/>
-        <field name="isbn13" type="string" length="13" column="isbn13" nullable="true"/>
+        <field name="isbn" type="string" length="13" column="isbn" nullable="false" type="ISBNType"/>
         <one-to-many field="book_categories" target-entity="BookCategory" mapped-by="book"/>
         <one-to-many field="book_reader" target-entity="BookReader" mapped-by="book"/>
         <one-to-many field="reading_now" target-entity="UserBookReadingNow" mapped-by="book"/>
